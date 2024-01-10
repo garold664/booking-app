@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
+import BookingWidget from '../BookingWidget';
 export default function PlacePage() {
   const { id } = useParams();
   const [place, setPlace] = useState(null);
@@ -32,7 +33,7 @@ export default function PlacePage() {
   if (!place) return;
 
   const allPhotos = (
-    <Transition in={showAllPhotos} mountOnEnter unmountOnExit timeout={500}>
+    <Transition in={showAllPhotos} mountOnEnter unmountOnExit timeout={300}>
       {(state) => {
         // let classNames;
         // if (state === 'entered') {
@@ -100,7 +101,7 @@ export default function PlacePage() {
       <Transition in={!showAllPhotos} mountOnEnter unmountOnExit timeout={900}>
         {(state) => {
           return (
-            <div className="mt-4 bg-gray-200 -mx-8 px-8 py-8">
+            <div className="mt-4 bg-gray-200 -mx-8 px-8 pt-8">
               <h1 className="text-3xl">{place.title}</h1>
               <a
                 className="flex gap-2 items-center font-semibold my-2 underline underline-offset-4"
@@ -130,7 +131,7 @@ export default function PlacePage() {
                 {place.address}
               </a>
               <div className="relative">
-                <section className="grid gap-2 grid-cols-[2fr_1fr] grid-rows-2">
+                <section className="grid gap-2 grid-cols-[2fr_1fr] grid-rows-2 rounded-3xl overflow-hidden">
                   <div className="row-span-2">{placePhoto(0)}</div>
                   <div className="">{placePhoto(1)}</div>
                   <div className="">{placePhoto(2)}</div>
@@ -155,6 +156,23 @@ export default function PlacePage() {
                   </svg>
                   Show more photos
                 </button>
+              </div>
+
+              <div className="grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr] my-8">
+                <div>
+                  <h2 className="my-4 font-bold text-2xl">Description</h2>
+                  {place.description}
+                  <b>Check in:</b> {place.checkIn}
+                  <br />
+                  <b>Check out:</b> {place.checkOut}
+                  <br />
+                  <b>Max number of guests: </b> {place.maxGuests}
+                </div>
+                <BookingWidget place={place} />
+              </div>
+              <div className="text-sm text-gray-700 leading-4 -mx-8 px-8 py-8 border-gray-300 border-t bg-white">
+                <h2 className="my-4 font-bold text-2xl">Extra Info</h2>
+                {place.extraInfo}
               </div>
             </div>
           );
