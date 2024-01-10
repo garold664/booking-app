@@ -23,6 +23,7 @@ export default function PlacePage() {
       place.photos[index] && (
         <img
           // className="object-cover w-full h-full"
+          onClick={() => setShowAllPhotos(true)}
           className="object-cover aspect-square h-full"
           src={`http://localhost:4000/uploads/${place.photos[index]}`}
         />
@@ -33,22 +34,17 @@ export default function PlacePage() {
   if (!place) return;
 
   const allPhotos = (
-    <Transition in={showAllPhotos} mountOnEnter unmountOnExit timeout={300}>
+    <Transition in={showAllPhotos} mountOnEnter unmountOnExit timeout={500}>
       {(state) => {
-        // let classNames;
-        // if (state === 'entered') {
-        //   classNames = 'opacity-100 translate-y-0';
-        // } else {
-        //   classNames = 'opacity-0 translate-y-full';
-        // }
         const classNames =
-          state === 'entered'
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 translate-y-full';
+          state === 'entering' || state === 'entered'
+            ? 'absolute opacity-100 top-0'
+            : 'fixed opacity-100 top-[100vh]';
         return (
           <div
-            className={`absolute z-10 bg-blue-200 inset-0 bottom-auto min-h-screen  transition-all duration-500 ${classNames}`}
+            className={`fixed z-10 bg-blue-200 inset-0 bottom-auto min-h-screen  transition-all duration-500 ${classNames}`}
           >
+            {/* <div className="fixed top-10 left-10">{state}</div> */}
             <div className="p-8 grid gap-4">
               <div>
                 <h2 className="text-3xl">Photos of {place.title}</h2>
