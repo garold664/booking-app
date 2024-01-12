@@ -290,4 +290,10 @@ app.get('/places', async (req, res) => {
   res.json(await Place.find());
 });
 
+//! 6:01
+
+app.post('/boooking', (req, res) => {
+  const { place, checkIn, checkOut, numberOfGuests, name, phone } = req.body;
+});
+
 app.listen(4000);

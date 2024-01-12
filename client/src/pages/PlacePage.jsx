@@ -24,7 +24,7 @@ export default function PlacePage() {
         <img
           // className="object-cover w-full h-full"
           onClick={() => setShowAllPhotos(true)}
-          className="object-cover aspect-square h-full"
+          className="object-cover aspect-square h-full cursor-pointer transition duration-300 hover:opacity-80"
           src={`http://localhost:4000/uploads/${place.photos[index]}`}
         />
       )
@@ -47,7 +47,7 @@ export default function PlacePage() {
             {/* <div className="fixed top-10 left-10">{state}</div> */}
             <div className="p-8 grid gap-4">
               <div>
-                <h2 className="text-3xl">Photos of {place.title}</h2>
+                <h2 className="text-3xl pr-48">Photos of {place.title}</h2>
                 <button
                   onClick={() => setShowAllPhotos(false)}
                   className="fixed right-2 top-2 flex gap-1 p-2 rounded-md bg-gray-200 shadow-lg shadow-gray-900 duration-150 hover:shadow-md hover:shadow-gray-700"
