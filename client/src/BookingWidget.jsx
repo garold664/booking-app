@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 //! 5:53
 
 import { differenceInCalendarDays } from 'date-fns';
+import { Navigate } from 'react-router-dom';
 
 export default function BookingWidget({ place }) {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [maxGuests, setMaxGuests] = useState(1);
   const [name, setName] = useState('');
-  const [mobile, setMobile] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const [redirect, setRedirect] = useState('');
 
   let numberOfNights = 0;
   if (checkIn && checkOut) {
@@ -16,6 +20,25 @@ export default function BookingWidget({ place }) {
       new Date(checkOut),
       new Date(checkIn)
     );
+  }
+
+  async function bookThisPlace() {
+    const data = {
+      place: place._id,
+      checkIn,
+      checkOut,
+      maxGuests,
+      name,
+      phone,
+      price: numberOfNights * place.price,
+    };
+    const response = await axios.post('/bookings', data);
+    const bookingId = response.data._id;
+    setRedirect(`/account/bookings/${bookingId}`);
+  }
+
+  if (redirect) {
+    return <Navigate to={redirect} />;
   }
 
   return (
@@ -59,20 +82,20 @@ export default function BookingWidget({ place }) {
                 type="text"
                 placeholder="John Doe"
                 value={name}
-                onClick={(ev) => setName(ev.target.value)}
+                onChange={(ev) => setName(ev.target.value)}
               />
 
               <label>Phone Number</label>
               <input
                 type="tel"
                 placeholder="+700000000"
-                value={mobile}
-                onClick={(ev) => setMobile(ev.target.value)}
+                value={phone}
+                onChange={(ev) => setPhone(ev.target.value)}
               />
             </div>
           </>
         )}
-        <button className="primary mt-4">
+        <button className="primary mt-4" onClick={bookThisPlace}>
           Book this place
           {/* //! 5:53 */}
           {numberOfNights > 0 && <span> ${numberOfNights * place.price}</span>}
