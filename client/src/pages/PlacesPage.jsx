@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import PlacesFormPage from './PlacesFormPage';
 import AccountNav from '../AccountNav';
 import axios from 'axios';
+import PlaceImg from '../PlaceImg';
 // console.log(Perks);
 export default function PlacesPage() {
   // const { action } = useParams();
@@ -60,13 +61,15 @@ export default function PlacesPage() {
               className="flex items-center bg-gray-100 gap-4 p-2 rounded-2xl"
             >
               <div className="shrink-0 w-32 h-32 bg-gray-300 rounded-xl overflow-hidden">
-                {place.photos.length && (
+                {/* {place.photos.length && (
                   <img
                     className="w-full h-full object-cover"
                     src={'http://localhost:4000/uploads/' + place.photos[0]}
                     // src={'/uploads/' + place.photos[0]}
                   />
-                )}
+                )} */}
+                {/* 6:30 */}
+                <PlaceImg place={place} />
               </div>
               <div className="grow-0 shrink">
                 <h2 className="text-xl">{place.title}</h2>

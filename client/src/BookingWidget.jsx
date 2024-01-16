@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 //! 5:53
 
 import { differenceInCalendarDays } from 'date-fns';
 import { Navigate } from 'react-router-dom';
+import { UserContext } from './UserContext';
 
 export default function BookingWidget({ place }) {
   const [checkIn, setCheckIn] = useState('');
@@ -13,6 +14,18 @@ export default function BookingWidget({ place }) {
   const [phone, setPhone] = useState('');
 
   const [redirect, setRedirect] = useState('');
+
+  //! 6:25
+
+  //! If we are logged in, we can prefill this input using account's name!!!
+
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+    }
+  }, user);
 
   let numberOfNights = 0;
   if (checkIn && checkOut) {
@@ -34,6 +47,7 @@ export default function BookingWidget({ place }) {
     };
     const response = await axios.post('/bookings', data);
     const bookingId = response.data._id;
+    // console.log(data);
     setRedirect(`/account/bookings/${bookingId}`);
   }
 
@@ -78,6 +92,7 @@ export default function BookingWidget({ place }) {
           <>
             <div className="flex flex-wrap items-center justify-around my-4 border-t-2 border-gray-200 -mx-4 p-2">
               <label>Your full name</label>
+
               <input
                 type="text"
                 placeholder="John Doe"
