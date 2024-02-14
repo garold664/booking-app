@@ -33,10 +33,10 @@ export default function PlacePage() {
 
   const allPhotos = (classNames) => (
     <div
-      className={`fixed z-10 bg-blue-200 inset-0 bottom-auto min-h-screen  transition-all duration-500 ${classNames}`}
+      className={`fixed z-10 bg-blue-200 inset-0 bottom-auto min-h-screen   transition-all duration-500 ${classNames}`}
     >
       {/* <div className="fixed top-10 left-10">{state}</div> */}
-      <div className="p-8 grid gap-4">
+      <div className="p-8 grid gap-4 max-w-[1400px] m-auto">
         <div>
           <h2 className="text-3xl pr-48">Photos of {place.title}</h2>
           <button
@@ -62,7 +62,7 @@ export default function PlacePage() {
         </div>
         {place?.photos?.length > 0 &&
           place.photos.map((photo) => (
-            <div>
+            <div key={photo}>
               <img
                 className="object-cover aspect-square w-full"
                 src={`http://localhost:4000/uploads/${photo}`}
@@ -93,26 +93,31 @@ export default function PlacePage() {
       <Transition in={!showAllPhotos} mountOnEnter unmountOnExit timeout={900}>
         {(state) => {
           return (
-            <div className="mt-4 bg-gray-200 -mx-8 px-8 pt-8">
-              <h1 className="text-3xl">{place.title}</h1>
-              <AddressLink>{place.address}</AddressLink>
-              <PlaceGallery place={place} setShowAllPhotos={setShowAllPhotos} />
+            <div className="mt-4 bg-gray-200 -mx-8 px-8 py-8 ">
+              <div className="max-w-[1400px] m-auto">
+                <h1 className="text-3xl">{place.title}</h1>
+                <AddressLink>{place.address}</AddressLink>
+                <PlaceGallery
+                  place={place}
+                  setShowAllPhotos={setShowAllPhotos}
+                />
 
-              <div className="grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr] my-8">
-                <div>
-                  <h2 className="my-4 font-bold text-2xl">Description</h2>
-                  {place.description}
-                  <b>Check in:</b> {place.checkIn}
-                  <br />
-                  <b>Check out:</b> {place.checkOut}
-                  <br />
-                  <b>Max number of guests: </b> {place.maxGuests}
+                <div className="grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr] my-8 ">
+                  <div>
+                    <h2 className="my-4 font-bold text-2xl">Description</h2>
+                    {place.description}
+                    <b>Check in:</b> {place.checkIn}
+                    <br />
+                    <b>Check out:</b> {place.checkOut}
+                    <br />
+                    <b>Max number of guests: </b> {place.maxGuests}
+                  </div>
+                  <BookingWidget place={place} />
                 </div>
-                <BookingWidget place={place} />
-              </div>
-              <div className="text-sm text-gray-700 leading-4 -mx-8 px-8 py-8 border-gray-300 border-t bg-white">
-                <h2 className="my-4 font-bold text-2xl">Extra Info</h2>
-                {place.extraInfo}
+                <div className="text-sm text-gray-700 leading-4 -mx-8 px-8 py-8 border-gray-300 border-t bg-white">
+                  <h2 className="my-4 font-bold text-2xl">Extra Info</h2>
+                  {place.extraInfo}
+                </div>
               </div>
             </div>
           );

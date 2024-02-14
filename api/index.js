@@ -293,8 +293,23 @@ app.get('/places', async (req, res) => {
 
 //! 6:01
 
+function getUserDataFromReq(req) {
+  //! 6:18
+  return new Promise((resolve, reject) => {
+    const { token } = req.cookies;
+    if (token) {
+      jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+        if (err) throw err;
+        resolve(userData);
+      });
+    }
+  });
+}
+
 app.post('/bookings', async (req, res) => {
-  const { place, checkIn, checkOut, maxGuests, name, phone } = req.body;
+  const { place, checkIn, checkOut, maxGuests, name, phone, price } = req.body;
+  //!6:21
+  const userData = await getUserDataFromReq(req);
   let doc;
   try {
     doc = await Booking.create({
@@ -304,11 +319,27 @@ app.post('/bookings', async (req, res) => {
       maxGuests,
       name,
       phone,
+      price,
+      user: userData.id,
     });
   } catch (error) {
     if (err) console.error(error.Message);
   }
   res.json(doc);
+});
+
+app.get('/bookings/:id', async (req, res) => {
+  const { id } = req.params;
+  res.json(await Booking.findById(id));
+});
+
+//! 6:17
+
+app.get('/bookings', async (req, res) => {
+  const userData = await getUserDataFromReq(req);
+  //! 6:28 Mongoose Populate
+  // https://mongoosejs.com/docs/populate.html
+  res.json(await Booking.find({ user: userData.id }).populate('place'));
 });
 
 app.listen(4000);

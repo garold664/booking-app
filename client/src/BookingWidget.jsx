@@ -25,7 +25,7 @@ export default function BookingWidget({ place }) {
     if (user) {
       setName(user.name);
     }
-  }, user);
+  }, [user]);
 
   let numberOfNights = 0;
   if (checkIn && checkOut) {
