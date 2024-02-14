@@ -17,7 +17,7 @@ const app = express();
 // const bcryptSalt = bcrypt.genSalt(10);
 const bcryptSalt = bcrypt.genSaltSync(10);
 
-const jwtSecret = 'ajf;djfjdl;ajldjlfjd';
+const jwtSecret = process.env.JWT_SECRET;
 
 // booking wNk5sVAiUXlJIGUE
 

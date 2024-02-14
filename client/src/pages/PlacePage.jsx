@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
 import BookingWidget from '../BookingWidget';
-import PlaceGallery from '../PlaceGallery';
+import PlaceGallery from '../components/PlaceGallery';
 import AddressLink from '../AddressLink';
 export default function PlacePage() {
   const { id } = useParams();
