@@ -5,9 +5,6 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
   const [photoLink, setPhotoLink] = useState('');
 
   async function addPhotoByLink(ev) {
-    //! 2:54:00 -> api/index.js
-
-    //! 2:58
     ev.preventDefault();
     if (photoLink === '') return;
     const { data: filename } = await axios.post('/upload-by-link', {
@@ -20,11 +17,9 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
   }
 
   function uploadPhoto(ev) {
-    //! 3:08
     const files = ev.target.files;
     // console.log(files);
     const data = new FormData();
-    // data.set('photos', files); //! 3:16
     // data.set('photos', [...files]);
 
     [...files].forEach((file) => {
@@ -83,7 +78,6 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
                 src={`http://localhost:4000/uploads/${link}`}
                 alt=""
               />
-              {/* 4:35 */}
               <button
                 type="button"
                 onClick={() => removePhoto(link)}
@@ -148,7 +142,6 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
             className="hidden"
             onChange={uploadPhoto}
           />{' '}
-          {/* //! 3:06  */}
           Upload
         </label>
       </div>

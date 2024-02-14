@@ -10,8 +10,6 @@ export default function PlacePage() {
 
   const [place, setPlace] = useState(null);
 
-  //! 5:22
-
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const location = useLocation();
   console.log(location.pathname);
@@ -73,10 +71,6 @@ export default function PlacePage() {
       </div>
     </div>
   );
-  //   //! 5:20
-  // if (showAllPhotos) {
-  // return allPhotos;
-  // }
 
   return (
     <>

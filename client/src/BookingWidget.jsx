@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-//! 5:53
 
 import { differenceInCalendarDays } from 'date-fns';
 import { Navigate } from 'react-router-dom';
@@ -14,8 +13,6 @@ export default function BookingWidget({ place }) {
   const [phone, setPhone] = useState('');
 
   const [redirect, setRedirect] = useState('');
-
-  //! 6:25
 
   //! If we are logged in, we can prefill this input using account's name!!!
 
@@ -112,7 +109,6 @@ export default function BookingWidget({ place }) {
         )}
         <button className="primary mt-4" onClick={bookThisPlace}>
           Book this place
-          {/* //! 5:53 */}
           {numberOfNights > 0 && <span> ${numberOfNights * place.price}</span>}
         </button>
       </div>

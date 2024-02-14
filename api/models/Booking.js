@@ -1,9 +1,6 @@
-//! 6:01
-
 const mongoose = require('mongoose');
 const PlaceModel = require('./Place');
 
-//! 6:28 Mongoose Populate
 // https://mongoosejs.com/docs/populate.html
 
 const BookingSchema = new mongoose.Schema({

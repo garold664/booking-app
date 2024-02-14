@@ -48,7 +48,6 @@ export default function Header() {
       </div>
       <Link
         // to={'/login'}
-        //!1:48
         to={user ? '/account' : '/login'}
         className="flex items-center gap-2 border border-gray-300 rounded-full p-2 px-4 shadow-md shadow-gray-300"
       >

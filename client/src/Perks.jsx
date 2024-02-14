@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 export default function Perks({ selected, onChange }) {
   function handleCbClick(ev) {
-    // console.log(ev.target);
     const { checked, name } = ev.target;
     if (checked) {
       onChange([...selected, name]);
@@ -10,14 +9,6 @@ export default function Perks({ selected, onChange }) {
       onChange(selected.filter((perk) => perk !== name));
     }
   }
-
-  // useEffect(() => {
-  //   first
-
-  //   return () => {
-  //     second
-  //   }
-  // }, [third])
 
   return (
     <>

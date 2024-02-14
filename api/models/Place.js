@@ -1,5 +1,3 @@
-//! 2:09:00
-
 const mongoose = require('mongoose');
 
 const PlaceSchema = new mongoose.Schema({
