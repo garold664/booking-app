@@ -5,7 +5,7 @@ import PlaceGallery from './PlaceGallery';
 import BookingWidget from '../BookingWidget';
 import { useGalleryContext } from '../contexts/galleryContext';
 
-const showGallery = (classNames, setShowAllPhotos, place) => {
+const showFullGallery = (classNames, setShowAllPhotos, place) => {
   return (
     <div
       className={`fixed z-10 bg-blue-200 inset-0 bottom-auto min-h-screen   transition-all duration-500 ${classNames}`}
@@ -50,11 +50,10 @@ const showGallery = (classNames, setShowAllPhotos, place) => {
   );
 };
 
-export default function Popup({ children, gallery, place }) {
+export default function Popup({ children, place }) {
   // const [showAllPhotos, setShowAllPhotos] = useState(false);
   const { isPopupShown: showAllPhotos, setIsPopupShown: setShowAllPhotos } =
     useGalleryContext();
-  console.log('setIsPopupShown: ', showAllPhotos);
   return (
     <>
       <Transition in={showAllPhotos} mountOnEnter unmountOnExit timeout={500}>
@@ -65,12 +64,11 @@ export default function Popup({ children, gallery, place }) {
               ? 'absolute opacity-100 top-0'
               : 'fixed opacity-100 top-[100vh]';
 
-          return showGallery(classNames, setShowAllPhotos, place);
+          return showFullGallery(classNames, setShowAllPhotos, place);
         }}
       </Transition>
       <Transition in={!showAllPhotos} mountOnEnter unmountOnExit timeout={900}>
         {(state) => {
-          console.log('state: ', state);
           return children;
         }}
       </Transition>
