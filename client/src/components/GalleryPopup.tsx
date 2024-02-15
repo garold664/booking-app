@@ -5,7 +5,13 @@ import PlaceGallery from './PlaceGallery';
 import BookingWidget from '../BookingWidget';
 import { useGalleryContext } from '../contexts/galleryContext';
 
-const showFullGallery = (classNames, setShowAllPhotos, place) => {
+import { PlaceType } from '../../../lib/types.ts';
+
+const showFullGallery = (
+  classNames: string,
+  setShowAllPhotos: React.Dispatch<React.SetStateAction<boolean>>,
+  place: PlaceType
+) => {
   return (
     <div
       className={`fixed z-10 bg-blue-200 inset-0 bottom-auto min-h-screen   transition-all duration-500 ${classNames}`}
@@ -36,7 +42,7 @@ const showFullGallery = (classNames, setShowAllPhotos, place) => {
         </div>
         )
         {place?.photos?.length > 0 &&
-          place.photos.map((photo) => (
+          place.photos.map((photo: string) => (
             <div key={photo}>
               <img
                 className="object-cover aspect-square w-full"
@@ -50,15 +56,19 @@ const showFullGallery = (classNames, setShowAllPhotos, place) => {
   );
 };
 
-export default function Popup({ children, place }) {
+type PopupProps = {
+  children: React.ReactNode;
+  place: PlaceType;
+};
+
+export default function Popup({ children, place }: PopupProps) {
   // const [showAllPhotos, setShowAllPhotos] = useState(false);
   const { isPopupShown: showAllPhotos, setIsPopupShown: setShowAllPhotos } =
     useGalleryContext();
   return (
     <>
       <Transition in={showAllPhotos} mountOnEnter unmountOnExit timeout={500}>
-        {(state) => {
-          console.log('state', state);
+        {(state: 'entering' | 'entered' | 'exiting' | 'exited') => {
           const classNames =
             state === 'entering' || state === 'entered'
               ? 'absolute opacity-100 top-0'
@@ -68,7 +78,7 @@ export default function Popup({ children, place }) {
         }}
       </Transition>
       <Transition in={!showAllPhotos} mountOnEnter unmountOnExit timeout={900}>
-        {(state) => {
+        {() => {
           return children;
         }}
       </Transition>
