@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../contexts/UserContext';
 import { Navigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import PlacesPage from './PlacesPage';
