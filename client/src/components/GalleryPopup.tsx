@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, useEffect, useState } from 'react';
+import React from 'react';
 import { Transition } from 'react-transition-group';
 
 import { useGalleryContext } from '../contexts/galleryContext';
