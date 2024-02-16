@@ -10,3 +10,9 @@ export type PlaceType = {
   checkOut: number;
   maxGuests: number;
 };
+
+export type User = {
+  name: string;
+  email: string;
+  password: string;
+};
