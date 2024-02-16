@@ -1,8 +1,6 @@
 import React, { Children, cloneElement, useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
-import AddressLink from '../AddressLink';
-import PlaceGallery from './PlaceGallery';
-import BookingWidget from '../BookingWidget';
+
 import { useGalleryContext } from '../contexts/galleryContext';
 
 import { PlaceType } from '../../../lib/types.ts';
