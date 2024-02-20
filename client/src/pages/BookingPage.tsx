@@ -11,7 +11,6 @@ import { type Booking } from '../../../lib/types';
 export default function BookingPage() {
   const { id } = useParams();
   const [booking, setBooking] = useState<Booking | null>(null);
-  console.log('booking', booking);
   useEffect(() => {
     if (id) {
       axios.get('/bookings').then((response) => {

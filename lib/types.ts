@@ -18,6 +18,7 @@ export type User = {
 };
 
 export type Booking = {
+  _id: string;
   place: PlaceType;
   user: User;
   checkIn: Date;

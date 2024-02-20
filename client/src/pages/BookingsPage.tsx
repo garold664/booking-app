@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import AccountNav from './../AccountNav';
+import AccountNav from '../components/AccountNav';
 import axios from 'axios';
-import PlaceImg from '../PlaceImg';
+import PlaceImg from '../components/PlaceImg';
 
 import { Link } from 'react-router-dom';
-import BookingDates from '../BookingDates';
+// import BookingDates from '../BookingDates';
+import { type Booking } from '../../../lib/types';
+import BookingDates from '../components/BookingDates';
 
 export default function BookingsPage() {
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     axios.get('/bookings').then((response) => {
       setBookings(response.data);
-      console.log(response.data);
+      console.log('bookings', response.data);
     });
   }, []);
   return (
     <>
       <AccountNav />
       {bookings?.length > 0 &&
-        bookings.map((booking) => (
+        bookings.map((booking: Booking) => (
           <Link
             to={`/account/bookings/${booking._id}`}
             className="flex gap-4 bg-gray-200 rounded-2xl overflow-hidden mb-4 transition hover:scale-[1.01] hover:contrast-[1.1] text-black"
-            key={booking.place}
+            key={booking.place._id}
           >
             <div className="w-48">
               <PlaceImg place={booking.place} />
