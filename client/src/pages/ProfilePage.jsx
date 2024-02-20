@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext.tsx';
 import { Navigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import PlacesPage from './PlacesPage';
@@ -12,7 +12,7 @@ export default function ProfilePage() {
 
   subpage = subpage ?? 'profile';
   // console.log(subpage);
-  const { ready, user, setUser } = useContext(UserContext);
+  const { ready, user, setUser } = useUserContext();
 
   const [redirect, setRedirect] = useState(null);
 

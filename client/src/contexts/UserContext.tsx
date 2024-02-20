@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { createContext, useEffect, useState } from 'react';
-import { User } from '../../../lib/types';
+import { type User } from '../../../lib/types';
 
 export const UserContext = createContext({});
 
@@ -9,6 +9,11 @@ type UserContextProviderProps = {
   children: React.ReactNode;
 };
 
+export function useUserContext() {
+  const value = useContext(UserContext);
+  if (value == null) throw Error('Cannot use outside of UserContextProvider');
+  return value;
+}
 export function UserContextProvider({ children }: UserContextProviderProps) {
   const [user, setUser] = useState<User | null>(null);
 
@@ -16,10 +21,6 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
   useEffect(() => {
     if (!user) {
-      // React.Strict mode is on
-      //StrictMode renders components twice (on dev but not production) in order to detect any problems with your code and warn you about them (which can be quite useful).
-      // console.log('use effect');
-      // axios.get('/profile ');
       axios.get('/profile').then(({ data }: { data: User }) => {
         setUser(data);
         setReady(true);

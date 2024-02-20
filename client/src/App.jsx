@@ -6,7 +6,7 @@ import RegisterPage from './pages/RegisterPage';
 import Layout from './Layout';
 
 import axios from 'axios';
-import { UserContextProvider } from './contexts/UserContext';
+import { UserContextProvider } from './contexts/UserContext.tsx';
 import { useEffect } from 'react';
 import ProfilePage from './pages/ProfilePage';
 import PlacesPage from './pages/PlacesPage';

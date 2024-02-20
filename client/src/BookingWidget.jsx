@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { differenceInCalendarDays } from 'date-fns';
 import { Navigate } from 'react-router-dom';
-import { UserContext } from './contexts/UserContext';
+import { useUserContext } from './contexts/UserContext.tsx';
 
 export default function BookingWidget({ place }) {
   const [checkIn, setCheckIn] = useState('');
@@ -16,7 +16,7 @@ export default function BookingWidget({ place }) {
 
   //! If we are logged in, we can prefill this input using account's name!!!
 
-  const { user } = useContext(UserContext);
+  const { user } = useUserContext();
 
   useEffect(() => {
     if (user) {

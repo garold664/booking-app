@@ -3,16 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AddressLink from '../AddressLink';
 import PlaceGallery from '../components/PlaceGallery';
-import BookingDates from '../BookingDates';
+import BookingDates from '../components/BookingDates';
 import GalleryPopup from '../components/GalleryPopup';
+
+import { type Booking } from '../../../lib/types';
 
 export default function BookingPage() {
   const { id } = useParams();
-  const [booking, setBooking] = useState(null);
+  const [booking, setBooking] = useState<Booking | null>(null);
+  console.log('booking', booking);
   useEffect(() => {
     if (id) {
       axios.get('/bookings').then((response) => {
-        const foundBooking = response.data.find(({ _id }) => _id === id);
+        const foundBooking = response.data.find(
+          ({ _id }: { _id: string }) => _id === id
+        );
         if (foundBooking) {
           setBooking(foundBooking);
         }

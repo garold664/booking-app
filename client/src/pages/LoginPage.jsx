@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
-import { UserContext } from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext.tsx';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('your@email.com');
   const [password, setPassword] = useState('123');
   const [redirect, setRedirect] = useState(false);
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useUserContext();
 
   async function handleLoginSubmit(ev) {
     ev.preventDefault();

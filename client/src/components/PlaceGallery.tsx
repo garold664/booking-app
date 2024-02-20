@@ -1,9 +1,14 @@
 import React from 'react';
 import { useGalleryContext } from '../contexts/galleryContext';
+import { PlaceType } from '../../../lib/types';
 
-export default function PlaceGallery({ place }) {
+type PlaceGalleryProps = {
+  place: PlaceType;
+};
+
+export default function PlaceGallery({ place }: PlaceGalleryProps) {
   const { setIsPopupShown: setShowAllPhotos } = useGalleryContext();
-  const placePhoto = (index) => {
+  const placePhoto = (index: number) => {
     return (
       place.photos?.[index] && (
         <img

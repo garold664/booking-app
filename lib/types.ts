@@ -16,3 +16,13 @@ export type User = {
   email: string;
   password: string;
 };
+
+export type Booking = {
+  place: PlaceType;
+  user: User;
+  checkIn: Date;
+  checkOut: Date;
+  name: string;
+  phone: string;
+  price: number;
+};

@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function AddressLink({ children, className }) {
+type AddressLinkProps = {
+  children: string;
+  className?: string;
+};
+
+export default function AddressLink({ children, className }: AddressLinkProps) {
   // if (!className)
   className = className ? className : 'my-3 block';
   className += ' flex items-center gap-2 font-semibold underline';

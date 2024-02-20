@@ -1,7 +1,15 @@
 import React from 'react';
 import { differenceInCalendarDays, format } from 'date-fns';
+import { type Booking } from '../../../lib/types';
 
-export default function BookingDates({ booking, className }) {
+type BookingDatesProps = {
+  booking: Booking;
+  className: string;
+};
+export default function BookingDates({
+  booking,
+  className,
+}: BookingDatesProps) {
   return (
     <div className={`${className} flex gap-2 items-center`}>
       <div className="flex items-center">
