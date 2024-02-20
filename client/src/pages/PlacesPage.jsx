@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 
 import PlacesFormPage from './PlacesFormPage';
-import AccountNav from '../AccountNav';
+import AccountNav from '../components/AccountNav';
 import axios from 'axios';
-import PlaceImg from '../PlaceImg';
+import PlaceImg from '../components/PlaceImg';
 // console.log(Perks);
 export default function PlacesPage() {
   // const { action } = useParams();

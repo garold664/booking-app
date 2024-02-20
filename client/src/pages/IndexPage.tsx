@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header';
+import Header from '../components/Header';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { PlaceType } from '../../../lib/types';
 
 export default function IndexPage() {
-  //! 4:48
-
-  const [places, setPlaces] = useState([]);
+  const [places, setPlaces] = useState<PlaceType[] | []>([]);
 
   useEffect(() => {
     axios.get('/places').then((response) => {
@@ -18,7 +17,7 @@ export default function IndexPage() {
   return (
     <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3 lg:grid-cols-6 mt-8">
       {places.length > 0 &&
-        places.map((place) => (
+        places.map((place: PlaceType) => (
           <Link to={`/place/${place._id}`} key={place._id}>
             {place.photos?.[0] && (
               <img

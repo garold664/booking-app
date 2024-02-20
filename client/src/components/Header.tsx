@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useUserContext } from './contexts/UserContext.tsx';
+import { useUserContext } from '../contexts/UserContext.tsx';
 
 export default function Header() {
   const { user } = useUserContext();
+  console.log(user);
   return (
     <header className="flex justify-between">
       <Link to={'/'} href="#" className="logo flex items-center gap-1">

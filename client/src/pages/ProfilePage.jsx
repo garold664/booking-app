@@ -3,7 +3,7 @@ import { useUserContext } from '../contexts/UserContext.tsx';
 import { Navigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import PlacesPage from './PlacesPage';
-import AccountNav from '../AccountNav';
+import AccountNav from '../components/AccountNav';
 
 export default function ProfilePage() {
   let { subpage } = useParams();
