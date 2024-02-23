@@ -1,11 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { differenceInCalendarDays } from 'date-fns';
 import { Navigate } from 'react-router-dom';
-import { useUserContext } from './contexts/UserContext.tsx';
+import { useUserContext } from '../contexts/UserContext.tsx';
+import { PlaceType } from '../../../lib/types.ts';
 
-export default function BookingWidget({ place }) {
+type BookingWidgetProps = {
+  place: PlaceType;
+};
+export default function BookingWidget({ place }: BookingWidgetProps) {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [maxGuests, setMaxGuests] = useState(1);
@@ -13,8 +17,6 @@ export default function BookingWidget({ place }) {
   const [phone, setPhone] = useState('');
 
   const [redirect, setRedirect] = useState('');
-
-  //! If we are logged in, we can prefill this input using account's name!!!
 
   const { user } = useUserContext();
 
@@ -44,7 +46,6 @@ export default function BookingWidget({ place }) {
     };
     const response = await axios.post('/bookings', data);
     const bookingId = response.data._id;
-    // console.log(data);
     setRedirect(`/account/bookings/${bookingId}`);
   }
 

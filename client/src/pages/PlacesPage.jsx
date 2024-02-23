@@ -7,17 +7,6 @@ import axios from 'axios';
 import PlaceImg from '../components/PlaceImg';
 // console.log(Perks);
 export default function PlacesPage() {
-  // const { action } = useParams();
-
-  // const [redirect, setRedirect] = useState(null);
-  // // console.log(action);
-
-  // //! 3:44
-
-  // if (redirect) {
-  //   return <Navigate to={redirect} />;
-  // }
-
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {

@@ -9,6 +9,7 @@ export type PlaceType = {
   checkIn: number;
   checkOut: number;
   maxGuests: number;
+  description: string;
 };
 
 export type User = {
