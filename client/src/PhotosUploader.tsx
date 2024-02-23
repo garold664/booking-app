@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default function PhotosUploader({ addedPhotos, onChange }) {
+type PhotosUploaderProps = {
+  addedPhotos: string[];
+  // onChange: (photos: string[]) => string[];
+  onChange: React.Dispatch<React.SetStateAction<string[]>>;
+};
+export default function PhotosUploader({
+  addedPhotos,
+  onChange,
+}: PhotosUploaderProps) {
   const [photoLink, setPhotoLink] = useState('');
 
-  async function addPhotoByLink(ev) {
+  async function addPhotoByLink(
+    ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
     ev.preventDefault();
     if (photoLink === '') return;
-    const { data: filename } = await axios.post('/upload-by-link', {
-      link: photoLink,
-    });
-    onChange((prev) => {
+    const { data: filename }: { data: string } = await axios.post(
+      '/upload-by-link',
+      {
+        link: photoLink,
+      }
+    );
+    onChange((prev: string[]) => {
       return [...prev, filename];
     });
     setPhotoLink('');
   }
 
-  function uploadPhoto(ev) {
-    const files = ev.target.files;
+  function uploadPhoto(ev: React.ChangeEvent<HTMLInputElement>) {
+    const files = ev.target.files || [];
     // console.log(files);
     const data = new FormData();
     // data.set('photos', [...files]);
@@ -38,11 +51,11 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
       });
   }
 
-  const removePhoto = (filename) => {
+  const removePhoto = (filename: string) => {
     onChange(addedPhotos.filter((photo) => photo !== filename));
   };
 
-  const selectAsMainPhoto = (filename) => {
+  const selectAsMainPhoto = (filename: string) => {
     if (addedPhotos[0] !== filename) {
       onChange([
         filename,

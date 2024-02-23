@@ -6,10 +6,9 @@ import AccountNav from '../components/AccountNav';
 import { Navigate, useParams } from 'react-router-dom';
 
 export default function PlacesFormPage() {
-  //! 2:40
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
-  const [addedPhotos, setAddedPhotos] = useState([]);
+  const [addedPhotos, setAddedPhotos] = useState<string[]>([]);
   const [description, setDescription] = useState('');
   const [perks, setPerks] = useState([]);
   const [extraInfo, setExtraInfo] = useState('');
@@ -17,22 +16,17 @@ export default function PlacesFormPage() {
   const [checkOut, setCheckOut] = useState('');
   const [maxGuests, setMaxGuests] = useState(1);
 
-  //! 4:57
   const [price, setPrice] = useState(100);
 
-  const [redirect, setRedirect] = useState(null);
-
-  //!4:15
+  const [redirect, setRedirect] = useState<string | null>(null);
 
   const { id } = useParams();
 
   useEffect(() => {
     if (!id) return;
 
-    //! 4:18
     axios.get(`/places/${id}`).then((response) => {
       const { data } = response;
-      // console.log(data);
       setTitle(data.title);
       setAddress(data.address);
       setAddedPhotos(data.photos);
@@ -46,21 +40,8 @@ export default function PlacesFormPage() {
     });
   }, [id]);
 
-  async function savePlace(ev) {
-    //! 3:40!
+  async function savePlace(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-    // console.log({
-    //   title,
-    //   address,
-    //   addedPhotos,
-    //   description,
-    //   perks,
-    //   extraInfo,
-    //   checkIn,
-    //   checkOut,
-    //   maxGuests,
-    // });
-    //!4:23
 
     const placeDate = {
       title,
@@ -147,7 +128,7 @@ export default function PlacesFormPage() {
               type="number"
               placeholder="2"
               value={maxGuests}
-              onChange={(ev) => setMaxGuests(ev.target.value)}
+              onChange={(ev) => setMaxGuests(+ev.target.value)}
             />
           </div>
           <div>
@@ -156,7 +137,7 @@ export default function PlacesFormPage() {
               type="number"
               placeholder="100"
               value={price}
-              onChange={(ev) => setPrice(ev.target.value)}
+              onChange={(ev) => setPrice(+ev.target.value)}
             />
           </div>
         </div>

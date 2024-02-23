@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 
-export default function Perks({ selected, onChange }) {
-  function handleCbClick(ev) {
+type PerksProps = {
+  selected: string[];
+  onChange: (perks: string[]) => void;
+};
+export default function Perks({ selected, onChange }: PerksProps) {
+  function handleCbClick(ev: React.ChangeEvent<HTMLInputElement>) {
     const { checked, name } = ev.target;
     if (checked) {
       onChange([...selected, name]);
