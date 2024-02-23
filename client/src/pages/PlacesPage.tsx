@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 
-import PlacesFormPage from './PlacesFormPage';
 import AccountNav from '../components/AccountNav';
 import axios from 'axios';
 import PlaceImg from '../components/PlaceImg';
+import { PlaceType } from '../../../lib/types';
 // console.log(Perks);
 export default function PlacesPage() {
-  const [places, setPlaces] = useState([]);
+  const [places, setPlaces] = useState<PlaceType[]>([]);
 
   useEffect(() => {
     axios.get('/user-places').then(({ data }) => {
@@ -50,14 +50,6 @@ export default function PlacesPage() {
               className="flex items-center bg-gray-100 gap-4 p-2 rounded-2xl"
             >
               <div className="shrink-0 w-32 h-32 bg-gray-300 rounded-xl overflow-hidden">
-                {/* {place.photos.length && (
-                  <img
-                    className="w-full h-full object-cover"
-                    src={'http://localhost:4000/uploads/' + place.photos[0]}
-                    // src={'/uploads/' + place.photos[0]}
-                  />
-                )} */}
-                {/* 6:30 */}
                 <PlaceImg place={place} />
               </div>
               <div className="grow-0 shrink">

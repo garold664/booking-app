@@ -7,7 +7,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('your@email.com');
   const [password, setPassword] = useState('123');
 
-  async function registerUser(ev) {
+  async function registerUser(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
 
     try {

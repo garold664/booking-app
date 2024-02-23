@@ -6,8 +6,7 @@ import RegisterPage from './pages/RegisterPage';
 import Layout from './Layout';
 
 import axios from 'axios';
-import { UserContextProvider } from './contexts/UserContext.tsx';
-import { useEffect } from 'react';
+import { UserContextProvider } from './contexts/UserContext';
 import ProfilePage from './pages/ProfilePage';
 import PlacesPage from './pages/PlacesPage';
 import PlacePage from './pages/PlacePage';
@@ -17,7 +16,6 @@ import BookingPage from './pages/BookingPage';
 import GalleryContextProvider from './contexts/galleryContext';
 
 axios.defaults.baseURL = 'http://localhost:4000';
-// axios.defaults.baseURL = 'http://127.0.0.1:4000';
 axios.defaults.withCredentials = true;
 
 function App() {

@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useUserContext } from '../contexts/UserContext.tsx';
-import { Navigate, Link, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import PlacesPage from './PlacesPage';
-import AccountNav from '../components/AccountNav';
+import PlacesPage from './PlacesPage.tsx';
+import AccountNav from '../components/AccountNav.tsx';
 
 export default function ProfilePage() {
   let { subpage } = useParams();
@@ -14,7 +14,7 @@ export default function ProfilePage() {
   // console.log(subpage);
   const { ready, user, setUser } = useUserContext();
 
-  const [redirect, setRedirect] = useState(null);
+  const [redirect, setRedirect] = useState<string | null>(null);
 
   // 2:04
   async function logout() {
@@ -27,8 +27,6 @@ export default function ProfilePage() {
     return 'Loading...';
   }
 
-  // if (ready && !user) {
-  //! 2:08
   if (ready && !user && !redirect) {
     return <Navigate to={'/login'} />;
   }
@@ -37,24 +35,18 @@ export default function ProfilePage() {
     return <Navigate to={redirect} />;
   }
 
-  // return <div>Account Page for {user?.name || ''}</div>;
-  // return <div>Account Page for {user.name}</div>;
   return (
     <div>
       <AccountNav />
-      {/* 2:03 */}
       {subpage === 'profile' && (
         <div className="text-center max-w-lg mx-auto">
-          Logged in as {user.name} {user.email} <br />
+          Logged in as {user?.name} {user?.email} <br />
           <button className="primary max-w-sm mt-2" onClick={logout}>
             Logout
           </button>
         </div>
       )}
-      {
-        //! 2:14
-        subpage === 'places' && <PlacesPage />
-      }
+      {subpage === 'places' && <PlacesPage />}
     </div>
   );
 }

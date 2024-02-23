@@ -4,7 +4,7 @@ import { useUserContext } from '../contexts/UserContext.tsx';
 
 export default function Header() {
   const { user } = useUserContext();
-  console.log('user', user);
+  // console.log('user', user);
   return (
     <header className="flex justify-between">
       <Link to={'/'} className="logo flex items-center gap-1">
