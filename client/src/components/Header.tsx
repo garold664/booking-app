@@ -4,10 +4,10 @@ import { useUserContext } from '../contexts/UserContext.tsx';
 
 export default function Header() {
   const { user } = useUserContext();
-  console.log(user);
+  console.log('user', user);
   return (
     <header className="flex justify-between">
-      <Link to={'/'} href="#" className="logo flex items-center gap-1">
+      <Link to={'/'} className="logo flex items-center gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

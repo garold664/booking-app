@@ -3,7 +3,12 @@ import React, { useContext } from 'react';
 import { createContext, useEffect, useState } from 'react';
 import { type User } from '../../../lib/types';
 
-export const UserContext = createContext({});
+type UserContextType = {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  ready: boolean;
+};
+export const UserContext = createContext<UserContextType | null>(null);
 
 type UserContextProviderProps = {
   children: React.ReactNode;
