@@ -12,18 +12,11 @@ export default function LoginPage() {
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
     try {
-      //! 1:23:30 withCredentials
-      //! 1:24:20 but lets make it default in App.jsx
-      const { data } = await axios.post(
-        '/login',
-        {
-          email,
-          password,
-        }
-        // { withCredentials: true }
-      );
-      //! 1:33
-      // console.log(response);
+      const { data } = await axios.post('/login', {
+        email,
+        password,
+      });
+
       setUser(data);
       alert('Login success!');
       setRedirect(true);
@@ -31,7 +24,6 @@ export default function LoginPage() {
       console.error('Login failed: ', err.message);
     }
   }
-  //! 1:28:00
   if (redirect) {
     return <Navigate to={'/'} />;
   }
