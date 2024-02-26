@@ -15,9 +15,9 @@ import imageDownloader from 'image-downloader';
 import multer from 'multer';
 import fs from 'fs';
 
-import User from '../models/Users.js';
-import Place from '../models/Place.js';
-import Booking from '../models/Booking.js';
+import User from './models/Users.js';
+import Place from './models/Place.js';
+import Booking from './models/Booking.js';
 dotenv.config();
 
 const app = express();
@@ -39,12 +39,15 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:5173',
+    // origin: 'http://localhost:5173',
+    origin: 'https://booking-app-czdc.onrender.com/',
   })
 );
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-app.use('/uploads', express.static(dirname + '/uploads'));
+import { resolve } from 'path';
+
+const __dirname = resolve(fileURLToPath(import.meta.url), '../..');
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // await mongoose.connect(process.env.MONGO_URL);
 mongoose.connect(process.env.MONGO_URL as string);
