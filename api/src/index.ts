@@ -1,23 +1,31 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const User = require('./models/Users.js');
-const Place = require('./models/Place.js');
-const Booking = require('./models/Booking.js');
-const { default: mongoose } = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
-const imageDownloader = require('image-downloader');
-const multer = require('multer');
-const fs = require('fs');
+import {
+  Booking as BookingType,
+  type User as UserType,
+} from '../../lib/types.js';
+
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+// require('dotenv').config();
+import { default as mongoose } from 'mongoose';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
+import imageDownloader from 'image-downloader';
+import multer from 'multer';
+import fs from 'fs';
+
+import User from '../models/Users.js';
+import Place from '../models/Place.js';
+import Booking from '../models/Booking.js';
+dotenv.config();
 
 const app = express();
 
 // const bcryptSalt = bcrypt.genSalt(10);
 const bcryptSalt = bcrypt.genSaltSync(10);
 
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret = process.env.JWT_SECRET as string;
 
 // booking wNk5sVAiUXlJIGUE
 
@@ -26,7 +34,6 @@ const jwtSecret = process.env.JWT_SECRET;
 // because we need to parse json first from req.body
 app.use(express.json()); // json parser
 
-//! 1:39:30
 app.use(cookieParser());
 
 app.use(
@@ -35,13 +42,12 @@ app.use(
     origin: 'http://localhost:5173',
   })
 );
-
-//! 3:03:00 make /uploads folder available in browser!!
-
-app.use('/uploads', express.static(__dirname + '/uploads'));
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+app.use('/uploads', express.static(dirname + '/uploads'));
 
 // await mongoose.connect(process.env.MONGO_URL);
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL as string);
 
 app.get('/test', (req, res) => {
   res.json('test ok');
@@ -67,27 +73,16 @@ app.post('/login', async (req, res) => {
   const userDoc = await User.findOne({ email });
 
   if (userDoc) {
-    // res.json('found');
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
-      // res.json('pass ok');
-      //! sending cookie!
-      //! npm i jsonwebtoken
       jwt.sign(
-        // { email: userDoc.email, id: userDoc._id, name: userDoc.name },
         { email: userDoc.email, id: userDoc._id },
         jwtSecret,
         {},
-        // callback
         (err, token) => {
           if (err) throw err;
-          // res.cookie('token', token).json('pass ok');
 
           res.cookie('token', token).json(userDoc);
-
-          // res
-          //   .cookie('token', token, { sameSite: none, secure: false })
-          //   .json('pass ok');
         }
       );
     } else {
@@ -103,7 +98,6 @@ app.get('/profile', (req, res) => {
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
-      // const userDoc = await User.findById(userData.id);
       const { name, email, _id } = await User.findById(userData.id);
       res.json({ name, email, _id });
     });
@@ -116,12 +110,8 @@ app.post('/logout', (req, res) => {
   res.cookie('token', '').json(true);
 });
 
-// console.log(__dirname);
-
 app.post('/upload-by-link', async (req, res) => {
   const { link } = req.body;
-
-  // npm i image-downloader
 
   const newName = 'photo' + Date.now() + '.jpg';
 
@@ -132,8 +122,6 @@ app.post('/upload-by-link', async (req, res) => {
 
   res.json(newName);
 });
-
-// npm i multer
 
 const photosMiddleware = multer({ dest: 'uploads/' });
 
@@ -189,7 +177,6 @@ app.post('/places', async function (req, res) {
   }
 });
 
-// app.get('/places', async (req, res) => {
 app.get('/user-places', async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -200,10 +187,8 @@ app.get('/user-places', async (req, res) => {
 
 app.get('/places/:id', async (req, res) => {
   const { id } = req.params;
-  //! we don't need to check the owner, because all places information should be available publicly
-  // res.json(await Place.findById(id));
+
   const data = await Place.findById(id);
-  // console.log('data: ', data);
   res.json(data);
 });
 
@@ -223,13 +208,10 @@ app.put('/places', async (req, res) => {
     price,
   } = req.body;
   console.log(req.body);
-  // console.log(photos);
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) return;
     const placeDoc = await Place.findById(id);
-    // console.log(userData.id, placeDoc.owner);
     if (userData.id === placeDoc.owner.toString()) {
-      // https://mongoosejs.com/docs/api/mongoose.html#Mongoose.prototype.set()
       placeDoc.set({
         title,
         address,
@@ -242,7 +224,7 @@ app.put('/places', async (req, res) => {
         maxGuests,
         price,
       });
-      await placeDoc.save(); // https://mongoosejs.com/docs/documents.html#documents-vs-models
+      await placeDoc.save();
       res.json('ok');
     }
   });
@@ -256,18 +238,23 @@ function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
     const { token } = req.cookies;
     if (token) {
-      jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-        if (err) throw err;
-        resolve(userData);
-      });
+      jwt.verify(
+        token,
+        jwtSecret,
+        {},
+        async (err: Error | null, userData: UserType) => {
+          if (err) throw err;
+          resolve(userData);
+        }
+      );
     }
   });
 }
 
 app.post('/bookings', async (req, res) => {
   const { place, checkIn, checkOut, maxGuests, name, phone, price } = req.body;
-  const userData = await getUserDataFromReq(req);
-  let doc;
+  const userData: UserType = await getUserDataFromReq(req);
+  let doc: BookingType | null = null;
   try {
     doc = await Booking.create({
       place,
@@ -280,7 +267,7 @@ app.post('/bookings', async (req, res) => {
       user: userData.id,
     });
   } catch (error) {
-    if (err) console.error(error.Message);
+    if (error) console.error(error.Message);
   }
   res.json(doc);
 });
@@ -291,8 +278,7 @@ app.get('/bookings/:id', async (req, res) => {
 });
 
 app.get('/bookings', async (req, res) => {
-  const userData = await getUserDataFromReq(req);
-  // https://mongoosejs.com/docs/populate.html
+  const userData: UserType = await getUserDataFromReq(req);
   res.json(await Booking.find({ user: userData.id }).populate('place'));
 });
 

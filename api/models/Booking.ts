@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const PlaceModel = require('./Place');
+import mongoose from 'mongoose';
+import PlaceModel from './Place.js';
 
 // https://mongoosejs.com/docs/populate.html
 
@@ -15,4 +15,5 @@ const BookingSchema = new mongoose.Schema({
 
 const BookingModel = mongoose.model('Booking', BookingSchema);
 
-module.exports = BookingModel;
+// module.exports = BookingModel;
+export default BookingModel;
