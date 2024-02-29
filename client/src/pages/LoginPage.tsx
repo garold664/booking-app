@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [redirect, setRedirect] = useState(false);
   const { setUser } = useUserContext();
 
-  async function handleLoginSubmit(ev) {
+  async function handleLoginSubmit(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
     try {
       const { data } = await axios.post('/login', {
@@ -20,7 +20,7 @@ export default function LoginPage() {
       setUser(data);
       alert('Login success!');
       setRedirect(true);
-    } catch (err) {
+    } catch (err: any | { message: string }) {
       console.error('Login failed: ', err.message);
     }
   }

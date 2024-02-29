@@ -8,15 +8,11 @@ import AccountNav from '../components/AccountNav.tsx';
 export default function ProfilePage() {
   let { subpage } = useParams();
 
-  // 1:57:30
-
   subpage = subpage ?? 'profile';
-  // console.log(subpage);
   const { ready, user, setUser } = useUserContext();
 
   const [redirect, setRedirect] = useState<string | null>(null);
 
-  // 2:04
   async function logout() {
     await axios.post('/logout');
     setRedirect('/');
