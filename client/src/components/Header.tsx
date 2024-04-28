@@ -6,8 +6,11 @@ export default function Header() {
   const { user } = useUserContext();
   // console.log('user', user);
   return (
-    <header className="flex justify-between">
-      <Link to={'/'} className="logo flex items-center gap-1">
+    <header className=" container mx-auto flex justify-between">
+      <Link
+        to={'/'}
+        className="logo flex items-center gap-1 transition transition-color duration-500 hover:text-primary"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -50,7 +53,7 @@ export default function Header() {
       <Link
         // to={'/login'}
         to={user ? '/account' : '/login'}
-        className="flex items-center gap-2 border border-gray-300 rounded-full p-2 px-4 shadow-md shadow-gray-300"
+        className="flex items-center gap-2 border border-gray-300 rounded-full p-2 px-4 shadow-md shadow-gray-300 transition duration-300 hover:shadow-lg"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

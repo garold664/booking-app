@@ -17,7 +17,7 @@ export default function BookingsPage() {
     });
   }, []);
   return (
-    <>
+    <div className="container mx-auto">
       <AccountNav />
       {bookings?.length > 0 &&
         bookings.map((booking: Booking) => (
@@ -55,6 +55,6 @@ export default function BookingsPage() {
             </div>
           </Link>
         ))}
-    </>
+    </div>
   );
 }

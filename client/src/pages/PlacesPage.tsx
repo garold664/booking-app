@@ -16,7 +16,7 @@ export default function PlacesPage() {
   }, []);
 
   return (
-    <div>
+    <div className="container mx-auto">
       <AccountNav />
 
       <div className="text-center">
