@@ -70,7 +70,7 @@ export default function PlacesFormPage() {
   }
 
   return (
-    <>
+    <div className="container mx-auto">
       <AccountNav />
       <form onSubmit={savePlace}>
         <label className="text-2xl block mt-4">Title</label>
@@ -143,6 +143,6 @@ export default function PlacesFormPage() {
         </div>
         <button className="primary my-4">Save</button>
       </form>
-    </>
+    </div>
   );
 }
