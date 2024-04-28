@@ -9,8 +9,8 @@ export default function AccountNav() {
 
   function linkClasses(type: null | string = null) {
     return type === subpage
-      ? 'py-2 px-6 bg-primary text-white rounded-full'
-      : 'py-2 px-6';
+      ? 'button py-2 px-6 bg-primary text-white rounded-full'
+      : 'button py-2 px-6';
   }
   return (
     <nav className="w-full flex justify-center mt-8 mb-8 gap-2">

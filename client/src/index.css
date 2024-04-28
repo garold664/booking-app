@@ -21,5 +21,20 @@ button {
 
 button.primary {
   /* background-color: #f5385d; */
-  @apply bg-primary p-2 w-full text-white rounded-2xl;
+  @apply bg-primary p-2 w-full text-white rounded-2xl transition;
+}
+
+.button {
+  @apply p-2 rounded-full transition;
+  &:hover {
+    @apply bg-gray-200;
+  }
+}
+
+.button.bg-primary {
+  @apply p-2 text-white rounded-full transition;
+
+  &:hover {
+    @apply bg-primary opacity-90;
+  }
 }

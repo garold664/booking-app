@@ -22,7 +22,7 @@ export default function PlacesPage() {
       <div className="text-center">
         <br />
         <Link
-          className="bg-primary text-white py-2 px-6 rounded-full inline-flex gap-1"
+          className="button bg-primary text-white py-2 px-6 rounded-full inline-flex gap-1"
           to={'/account/places/new'}
         >
           <svg
@@ -42,12 +42,12 @@ export default function PlacesPage() {
           Add new place
         </Link>
       </div>
-      <div>
+      <div className="mt-8">
         {places.length > 0 &&
           places.map((place) => (
             <Link
               to={`/account/places/${place._id}`}
-              className="flex items-center bg-gray-100 gap-4 p-2 rounded-2xl"
+              className="flex items-center bg-gray-100 gap-4 p-2 rounded-2xl my-4 shadow-md hover:scale-[1.01] hover:shadow-sm transition"
             >
               <div className="shrink-0 w-32 h-32 bg-gray-300 rounded-xl overflow-hidden">
                 <PlaceImg place={place} />

@@ -24,7 +24,7 @@ export default function Header() {
         </svg>
         <span className="font-bold text-xl">airbnc</span>
       </Link>
-      <div className="flex  gap-2 border border-gray-300 rounded-full p-2 px-4 shadow-md shadow-gray-300 overflow-hidden">
+      <div className="flex  gap-2 border border-gray-300 rounded-full p-2 px-4 shadow-md shadow-gray-300 overflow-hidden transition hover:shadow-lg cursor-pointer select-none">
         <div>Anywhere</div>
         <div className="border-l border-gray-300"></div>
         <div>Anyweek</div>
