@@ -12,8 +12,8 @@ export default function PlacesFormPage() {
   const [description, setDescription] = useState('');
   const [perks, setPerks] = useState([]);
   const [extraInfo, setExtraInfo] = useState('');
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
+  const [checkIn, setCheckIn] = useState(14);
+  const [checkOut, setCheckOut] = useState(11);
   const [maxGuests, setMaxGuests] = useState(1);
 
   const [price, setPrice] = useState(100);
@@ -107,16 +107,16 @@ export default function PlacesFormPage() {
           <div>
             <label className="block mt-2">Check in time</label>
             <input
-              type="text"
+              type="number"
               placeholder="14:00"
               value={checkIn}
-              onChange={(ev) => setCheckIn(ev.target.value)}
+              onChange={(ev) => setCheckIn(+ev.target.value)}
             />
           </div>
           <div>
             <label className="block mt-2">Check out time</label>
             <input
-              type="text"
+              type="number"
               placeholder="11:00"
               value={checkOut}
               onChange={(ev) => setCheckOut(ev.target.value)}
