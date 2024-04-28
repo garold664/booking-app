@@ -9,6 +9,13 @@ type PlaceGalleryProps = {
 export default function PlaceGallery({ place }: PlaceGalleryProps) {
   const { setIsPopupShown: setShowAllPhotos } = useGalleryContext();
   const placePhoto = (index: number) => {
+    if (!place.photos || place.photos.length === 0)
+      return (
+        <img
+          className="object-cover aspect-square h-full cursor-pointer transition duration-300 hover:opacity-80"
+          src="https://via.placeholder.com/600"
+        />
+      );
     return (
       place.photos?.[index] && (
         <img
