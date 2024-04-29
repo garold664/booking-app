@@ -39,6 +39,6 @@ button.primary {
   @apply p-2 text-white rounded-full transition;
 
   &:hover {
-    @apply bg-primary opacity-90;
+    @apply opacity-90;
   }
 }
