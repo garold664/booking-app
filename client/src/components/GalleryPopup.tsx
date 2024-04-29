@@ -38,7 +38,7 @@ const showFullGallery = (
             Close photos
           </button>
         </div>
-        )
+
         {place?.photos?.length > 0 &&
           place.photos.map((photo: string) => (
             <div key={photo}>
