@@ -15,7 +15,8 @@ import BookingsPage from './pages/BookingsPage';
 import BookingPage from './pages/BookingPage';
 import GalleryContextProvider from './contexts/galleryContext';
 
-axios.defaults.baseURL = 'http://localhost:4000';
+// axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'https://booking-app-api-wpom.onrender.com/test';
 axios.defaults.withCredentials = true;
 
 function App() {
