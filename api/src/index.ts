@@ -44,8 +44,10 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:5173',
-    // origin: 'https://booking-app-czdc.onrender.com',
+    origin: [
+      'http://localhost:5173',
+      'https://booking-app-front-1v42.onrender.com/',
+    ],
   })
 );
 import { fileURLToPath } from 'url';
