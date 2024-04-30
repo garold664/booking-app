@@ -4,7 +4,7 @@ import {
   Booking as BookingType,
   PlaceType,
   type User as UserType,
-} from '../../lib/types.js';
+} from './lib/types.js';
 
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
