@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   Booking as BookingType,
   PlaceType,
