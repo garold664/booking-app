@@ -1,5 +1,6 @@
 import React from 'react';
 import { type PlaceType } from '../../../lib/types';
+import baseUrl from '../baseUrl';
 
 type PlaceImgProps = {
   place: PlaceType;
@@ -13,9 +14,6 @@ export default function PlaceImg({
   className = 'w-full h-full object-cover',
 }: PlaceImgProps) {
   if (!place?.photos?.length) return '';
-
-  // const baseUrl = 'https://localhost:4000';
-  const baseUrl = 'https://booking-app-api-wpom.onrender.com';
 
   return (
     <img

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import baseUrl from './baseUrl';
 
 type PhotosUploaderProps = {
   addedPhotos: string[];
@@ -63,6 +64,7 @@ export default function PhotosUploader({
       ]);
     }
   };
+
   return (
     <>
       <label className="text-2xl block mt-4">Photos</label>
@@ -88,7 +90,7 @@ export default function PhotosUploader({
             <div className="img-holder relative h-32 flex p-1" key={link}>
               <img
                 className="rounded-2xl w-full object-cover"
-                src={`http://localhost:4000/uploads/${link}`}
+                src={`${baseUrl}/uploads/${link}`}
                 alt=""
               />
               <button

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useGalleryContext } from '../contexts/galleryContext';
 import { PlaceType } from '../../../lib/types';
+import baseUrl from '../baseUrl';
 
 type PlaceGalleryProps = {
   place: PlaceType;
@@ -22,7 +23,7 @@ export default function PlaceGallery({ place }: PlaceGalleryProps) {
           // className="object-cover w-full h-full"
           onClick={() => setShowAllPhotos(true)}
           className="object-cover aspect-square h-full cursor-pointer transition duration-300 hover:opacity-80"
-          src={`http://localhost:4000/uploads/${place.photos[index]}`}
+          src={`${baseUrl}/uploads/${place.photos[index]}`}
         />
       )
     );

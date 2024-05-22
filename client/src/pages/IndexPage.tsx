@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { PlaceType } from '../../../lib/types';
+import baseUrl from '../baseUrl';
 
 export default function IndexPage() {
   const [places, setPlaces] = useState<PlaceType[] | []>([]);
@@ -22,7 +23,7 @@ export default function IndexPage() {
             {place.photos?.[0] && (
               <img
                 className="rounded-2xl aspect-square object-cover mb-2"
-                src={'http://localhost:4000/uploads/' + place.photos[0]}
+                src={`${baseUrl}/uploads/${place.photos[0]}`}
                 alt=""
               />
             )}
