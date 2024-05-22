@@ -4,6 +4,7 @@ import { Transition } from 'react-transition-group';
 import { useGalleryContext } from '../contexts/galleryContext';
 
 import { PlaceType } from '../../../lib/types.ts';
+import baseUrl from '../baseUrl.ts';
 
 const showFullGallery = (
   classNames: string,
@@ -44,7 +45,7 @@ const showFullGallery = (
             <div key={photo}>
               <img
                 className="object-cover aspect-square w-full"
-                src={`http://localhost:4000/uploads/${photo}`}
+                src={`${baseUrl}/uploads/${photo}`}
                 alt=""
               />
             </div>
