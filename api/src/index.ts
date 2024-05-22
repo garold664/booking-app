@@ -47,10 +47,12 @@ app.use(cookieParser());
 //   'http://localhost:5173',
 //   'https://booking-app-front-1v42.onrender.com/',
 // ],
+
+const origin = 'https://booking-app-front-1v42.onrender.com';
 app.use(
   cors({
     credentials: true,
-    origin: 'https://booking-app-front-1v42.onrender.com/',
+    origin,
   })
 );
 import { fileURLToPath } from 'url';
@@ -107,6 +109,7 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
+  console.log();
   const { token } = req.cookies;
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
