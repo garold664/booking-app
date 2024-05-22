@@ -14,10 +14,13 @@ export default function PlaceImg({
 }: PlaceImgProps) {
   if (!place?.photos?.length) return '';
 
+  // const baseUrl = 'https://localhost:4000';
+  const baseUrl = 'https://booking-app-api-wpom.onrender.com';
+
   return (
     <img
       className={className}
-      src={'http://localhost:4000/uploads/' + place.photos[index]}
+      src={`${baseUrl}/uploads/${place.photos[index]}`}
     />
   );
 }
