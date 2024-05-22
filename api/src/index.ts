@@ -43,13 +43,14 @@ app.use(express.json()); // json parser
 
 app.use(cookieParser());
 
+// origin: [
+//   'http://localhost:5173',
+//   'https://booking-app-front-1v42.onrender.com/',
+// ],
 app.use(
   cors({
     credentials: true,
-    origin: [
-      'http://localhost:5173',
-      'https://booking-app-front-1v42.onrender.com/',
-    ],
+    origin: 'https://booking-app-front-1v42.onrender.com/',
   })
 );
 import { fileURLToPath } from 'url';
