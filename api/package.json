@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "nodemon dist/index.js",
-    "build": "tsc --strict false --noEmit false --noEmitOnError false && node dist/index.js "
+    "watch": "tsc -w --strict false --noEmit false --noEmitOnError false ",
+    "dev": "nodemon dist/index.js"
   },
   "dependencies": {
     "@types/jest": "^29.5.12",
