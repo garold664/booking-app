@@ -46,6 +46,7 @@ export default function PlacesPage() {
         {places.length > 0 &&
           places.map((place) => (
             <Link
+              key={place._id}
               to={`/account/places/${place._id}`}
               className="flex items-center bg-gray-100 gap-4 p-2 rounded-2xl my-4 shadow-md hover:scale-[1.01] hover:shadow-sm transition"
             >

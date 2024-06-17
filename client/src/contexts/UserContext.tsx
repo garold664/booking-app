@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { createContext, useEffect, useState } from 'react';
-import { type User } from '../../../lib/types';
+import { type User } from '../lib/types';
 
 type UserContextType = {
   user: User | null;

@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 api/.env
-api/uploads
+
 
 
