@@ -43,9 +43,12 @@ app.use(express.json()); // json parser
 
 app.use(cookieParser());
 
-const origin = 'http://localhost:5173';
+// const origin = 'http://localhost:5173';
 
 // const origin = 'https://booking-app-front-1v42.onrender.com';
+
+const origin = process.env.ORIGIN;
+console.log(origin);
 
 app.use(
   cors({
