@@ -7,10 +7,13 @@ export default function LoginPage() {
   const [email, setEmail] = useState('your@email.com');
   const [password, setPassword] = useState('123');
   const [redirect, setRedirect] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useUserContext();
 
   async function handleLoginSubmit(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
+    setIsLoading(true);
     try {
       const { data } = await axios.post('/login', {
         email,
@@ -20,8 +23,11 @@ export default function LoginPage() {
       setUser(data);
       alert('Login success!');
       setRedirect(true);
+      setIsLoading(false);
     } catch (err: any | { message: string }) {
-      console.error('Login failed: ', err.message);
+      setError(err.message);
+      setIsLoading(false);
+      // alert('Login failed: ' + err.message);
     }
   }
   if (redirect) {
@@ -44,7 +50,12 @@ export default function LoginPage() {
           value={password}
           onChange={(ev) => setPassword(ev.target.value)}
         />
-        <button className="primary">Login</button>
+        <button
+          className={isLoading ? 'primary-disabled' : 'primary'}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Loading...' : 'Login'}
+        </button>
         <div className="text-center py-2 text-gray-500">
           Don't have an account yet?{' '}
           <Link to={'/register'} className="underline text-black font-semibold">

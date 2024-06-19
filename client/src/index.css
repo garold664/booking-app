@@ -28,6 +28,15 @@ button.primary {
   }
 }
 
+button.primary-disabled {
+  /* background-color: #f5385d; */
+  @apply bg-gray-400 p-2 w-full text-white rounded-2xl transition;
+
+  &:hover {
+    @apply bg-gray-400 opacity-90;
+  }
+}
+
 .button {
   @apply p-2 rounded-full transition;
   &:hover {
