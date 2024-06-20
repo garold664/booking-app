@@ -48,7 +48,7 @@ app.use(cookieParser());
 // const origin = 'https://booking-app-front-1v42.onrender.com';
 
 const origin = process.env.ORIGIN;
-console.log(origin);
+// console.log(origin);
 
 app.use(
   cors({
@@ -98,7 +98,14 @@ app.post('/login', async (req, res) => {
         (err, token) => {
           if (err) throw err;
 
-          res.cookie('token', token).json(userDoc);
+          res
+            .cookie('token', token, {
+              httpOnly: true,
+              sameSite: 'none',
+              secure: true,
+              maxAge: 1000 * 60 * 60 * 24 * 365,
+            })
+            .json(userDoc);
         }
       );
     } else {
@@ -111,6 +118,8 @@ app.post('/login', async (req, res) => {
 
 app.get('/profile', (req, res) => {
   const { token } = req.cookies;
+
+  // console.log(req.cookies);
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
@@ -143,7 +152,7 @@ const photosMiddleware = multer({ dest: 'uploads/' });
 
 app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
   const uploadedFiles = [...req.files].map((file) => {
-    console.log(file);
+    // console.log(file);
     const { path, originalname } = file;
     const ext = originalname.split('.').at(-1);
     const newPath = path + '.' + ext;
