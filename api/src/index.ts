@@ -110,7 +110,6 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-  console.log();
   const { token } = req.cookies;
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -199,6 +198,8 @@ app.post('/places', async function (req, res) {
 app.get('/user-places', async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    if (!userData) return res.json({});
     const { id } = userData as UserData;
     res.json(await Place.find({ owner: id }));
   });
@@ -226,7 +227,7 @@ app.put('/places', async (req, res) => {
     maxGuests,
     price,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) return;
     const placeDoc = await Place.findById(id);

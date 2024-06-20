@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import AccountNav from '../components/AccountNav';
 import axios from 'axios';
 import PlaceImg from '../components/PlaceImg';
-import { PlaceType } from '../../../lib/types';
+import { type PlaceType } from '../lib/types';
 // console.log(Perks);
 export default function PlacesPage() {
   const [places, setPlaces] = useState<PlaceType[]>([]);

@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AccountNav from '../components/AccountNav';
 import axios from 'axios';
 import PlaceImg from '../components/PlaceImg';
 
 import { Link } from 'react-router-dom';
 // import BookingDates from '../BookingDates';
-import { type Booking } from '../../../lib/types';
+import { type Booking } from '../lib/types';
 import BookingDates from '../components/BookingDates';
 
 export default function BookingsPage() {
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
+    console.log(axios.defaults);
     axios.get('/bookings').then((response) => {
       setBookings(response.data);
-      console.log('bookings', response.data);
+      // console.log('bookings', response.data);
     });
   }, []);
   return (

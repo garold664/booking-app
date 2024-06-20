@@ -12,6 +12,7 @@ export default function IndexPage() {
 
   useEffect(() => {
     setIsLoading(true);
+    // console.log('loading places');
     axios
       .get('/places')
       .then((response) => {
