@@ -48,6 +48,6 @@ button.primary[disabled] {
   @apply p-2 text-white rounded-full transition;
 
   &:hover {
-    @apply opacity-90;
+    @apply opacity-90 bg-red-400;
   }
 }
