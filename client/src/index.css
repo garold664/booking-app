@@ -28,9 +28,9 @@ button.primary {
   }
 }
 
-button.primary-disabled {
+button.primary[disabled] {
   /* background-color: #f5385d; */
-  @apply bg-gray-400 p-2 w-full text-white rounded-2xl transition;
+  @apply bg-gray-400 p-2 w-full text-white rounded-2xl transition cursor-not-allowed;
 
   &:hover {
     @apply bg-gray-400 opacity-90;

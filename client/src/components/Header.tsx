@@ -4,7 +4,6 @@ import { useUserContext } from '../contexts/UserContext.tsx';
 
 export default function Header() {
   const { user } = useUserContext();
-  console.log('user', user);
   return (
     <header className=" container mx-auto flex justify-between">
       <Link

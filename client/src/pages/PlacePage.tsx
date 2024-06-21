@@ -19,7 +19,6 @@ export default function PlacePage() {
     if (location.pathname.includes('/account/bookings/')) {
       axios.get(`/bookings/${id}`).then((res) => {
         setPlace(res.data);
-        console.log(res.data);
       });
     } else
       axios.get(`/places/${id}`).then((res) => {

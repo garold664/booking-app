@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUserContext } from '../contexts/UserContext.tsx';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('your@email.com');
-  const [password, setPassword] = useState('123');
+  const [email, setEmail] = useState('test@email.com');
+  const [password, setPassword] = useState('test');
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -51,11 +51,13 @@ export default function LoginPage() {
           onChange={(ev) => setPassword(ev.target.value)}
         />
         <button
-          className={isLoading ? 'primary-disabled' : 'primary'}
-          disabled={isLoading}
+          // className={isLoading ? 'primary-disabled' : 'primary'}
+          className={'primary'}
+          disabled={isLoading && !error}
         >
-          {isLoading ? 'Loading...' : 'Login'}
+          {isLoading && !error ? 'Loading...' : 'Login'}
         </button>
+        {error && <p className="text-red-600 font-bold">{error}</p>}
         <div className="text-center py-2 text-gray-500">
           Don't have an account yet?{' '}
           <Link to={'/register'} className="underline text-black font-semibold">
@@ -63,6 +65,7 @@ export default function LoginPage() {
           </Link>
         </div>
       </form>
+      {error && <p>{error}</p>}
     </div>
   );
 }

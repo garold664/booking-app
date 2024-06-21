@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useUserContext } from '../contexts/UserContext.tsx';
 import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -12,11 +12,19 @@ export default function ProfilePage() {
   const { ready, user, setUser } = useUserContext();
 
   const [redirect, setRedirect] = useState<string | null>(null);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   async function logout() {
-    await axios.post('/logout');
-    setRedirect('/');
-    setUser(null);
+    try {
+      setIsLoading(true);
+      await axios.post('/logout');
+      setIsLoading(false);
+      setRedirect('/');
+      setUser(null);
+    } catch (error) {
+      setError('Logout failed. Try again later.');
+    }
   }
 
   if (!ready) {
@@ -35,11 +43,19 @@ export default function ProfilePage() {
     <div>
       <AccountNav />
       {subpage === 'profile' && (
-        <div className="text-center max-w-lg mx-auto">
-          Logged in as {user?.name} {user?.email} <br />
-          <button className="primary max-w-sm mt-2" onClick={logout}>
-            Logout
+        <div className="text-center max-w-md mx-auto">
+          <p className="my-6">
+            Logged in as <b>{user?.name}</b> ({user?.email})
+          </p>
+          <button
+            onClick={logout}
+            // className={isLoading && !error ? 'primary-disabled' : 'primary'}
+            className={'primary'}
+            disabled={isLoading && !error}
+          >
+            {isLoading && !error ? 'Loading...' : 'Logout'}
           </button>
+          {error && <p className="text-red-600 font-bold">{error}</p>}
         </div>
       )}
       {subpage === 'places' && <PlacesPage />}

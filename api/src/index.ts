@@ -236,7 +236,6 @@ app.put('/places', async (req, res) => {
     maxGuests,
     price,
   } = req.body;
-  // console.log(req.body);
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) return;
     const placeDoc = await Place.findById(id);
