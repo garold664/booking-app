@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "watch": "tsc -w --strict false --noEmit false --noEmitOnError false ",
-    "dev": "nodemon api/index.js",
-    "start": "node api/index.js",
-    "build": "npx tsc"
+    "dev": "nodemon dist/index.js",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "@types/jest": "^29.5.12",
