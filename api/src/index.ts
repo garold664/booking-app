@@ -22,7 +22,9 @@ import Booking from './models/Booking.js';
 dotenv.config();
 
 type UserData = {
-  id: string;
+  name: string;
+  email: string;
+  _id: string;
 };
 
 const app = express();
@@ -121,7 +123,9 @@ app.get('/profile', (req, res) => {
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
-      const { name, email, _id } = await User.findById(userData.id);
+      const { name, email, _id } = (await User.findById(
+        (userData as UserType).id
+      )) as UserData;
       res.json({ name, email, _id });
     });
   } else {
@@ -149,6 +153,7 @@ app.post('/upload-by-link', async (req, res) => {
 const photosMiddleware = multer({ dest: 'uploads/' });
 
 app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
+  if (!Array.isArray(req.files)) return;
   const uploadedFiles = [...req.files].map((file) => {
     // console.log(file);
     const { path, originalname } = file;
@@ -182,7 +187,7 @@ app.post('/places', async function (req, res) {
 
       if (userData) {
         const placeDoc = await Place.create({
-          owner: userData.id,
+          owner: (userData as UserType).id,
           title,
           address,
           photos: addedPhotos,
@@ -207,7 +212,7 @@ app.get('/user-places', async (req, res) => {
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
     if (!userData) return res.json({});
-    const { id } = userData as UserData;
+    const { id } = userData as UserType;
     res.json(await Place.find({ owner: id }));
   });
 });
@@ -237,7 +242,7 @@ app.put('/places', async (req, res) => {
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) return;
     const placeDoc = await Place.findById(id);
-    if (userData?.id === placeDoc?.owner?.toString()) {
+    if ((userData as UserType).id === placeDoc?.owner?.toString()) {
       placeDoc?.set({
         title,
         address,
@@ -264,15 +269,10 @@ function getUserDataFromReq(req: Request): Promise<UserType> {
   return new Promise((resolve, reject) => {
     const { token } = req.cookies;
     if (token) {
-      jwt.verify(
-        token,
-        jwtSecret,
-        null,
-        async (err: Error | null, userData: UserType) => {
-          if (err) throw err;
-          resolve(userData);
-        }
-      );
+      jwt.verify(token, jwtSecret, {}, async (err: Error | null, userData) => {
+        if (err) throw err;
+        resolve(userData as UserType);
+      });
     }
   });
 }
@@ -280,7 +280,7 @@ function getUserDataFromReq(req: Request): Promise<UserType> {
 app.post('/bookings', async (req, res) => {
   const { place, checkIn, checkOut, maxGuests, name, phone, price } = req.body;
   const userData: UserType = await getUserDataFromReq(req);
-  let doc: BookingType | null = null;
+  let doc = null;
   try {
     doc = await Booking.create({
       place,
@@ -304,7 +304,7 @@ app.get('/bookings/:id', async (req, res) => {
 });
 
 app.get('/bookings', async (req, res) => {
-  const userData: UserData = await getUserDataFromReq(req);
+  const userData: UserType = await getUserDataFromReq(req);
   res.json(await Booking.find({ user: userData.id }).populate('place'));
 });
 
