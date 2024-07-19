@@ -18,6 +18,11 @@ export default function PhotosUploader({
   ) {
     ev.preventDefault();
     if (photoLink === '') return;
+    const photoLinkUrl = new URL(photoLink);
+    if (!photoLinkUrl.protocol.includes('http')) {
+      console.error('Invalid URL');
+      return;
+    }
     const { data: filename }: { data: string } = await axios.post(
       '/upload-by-link',
       {
