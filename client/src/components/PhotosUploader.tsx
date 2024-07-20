@@ -51,6 +51,7 @@ export default function PhotosUploader({
       })
       .then((response) => {
         const { data: filenames } = response;
+        console.log(filenames);
         onChange((prev) => {
           return [...prev, ...filenames];
         });
@@ -95,7 +96,8 @@ export default function PhotosUploader({
             <div className="img-holder relative h-32 flex p-1" key={link}>
               <img
                 className="rounded-2xl w-full object-cover"
-                src={`${baseUrl}/uploads/${link}`}
+                // src={`${baseUrl}/uploads/${link}`}
+                src={`${link}`}
                 alt=""
               />
               <button

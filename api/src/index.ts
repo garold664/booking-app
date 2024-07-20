@@ -19,6 +19,8 @@ import fs from 'fs';
 import User from './models/Users.js';
 import Place from './models/Place.js';
 import Booking from './models/Booking.js';
+
+import uploadRoute from './routes/uploadRoute.js';
 dotenv.config();
 
 type UserData = {
@@ -141,30 +143,35 @@ app.post('/upload-by-link', async (req, res) => {
   const { link } = req.body;
 
   const newName = 'photo' + Date.now() + '.jpg';
-
-  await imageDownloader.image({
-    url: link,
-    dest: __dirname + '/uploads/' + newName,
-  });
-
-  res.json(newName);
+  try {
+    await imageDownloader.image({
+      url: link,
+      dest: __dirname + '/uploads/' + newName,
+    });
+    res.json(newName);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
 });
 
-const photosMiddleware = multer({ dest: 'uploads/' });
+// const photosMiddleware = multer({ dest: 'uploads/' });
 
-app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
-  if (!Array.isArray(req.files)) return;
-  const uploadedFiles = [...req.files].map((file) => {
-    // console.log(file);
-    const { path, originalname } = file;
-    const ext = originalname.split('.').at(-1);
-    const newPath = path + '.' + ext;
+app.use(uploadRoute);
 
-    fs.renameSync(path, newPath);
-    return newPath.replace('uploads\\', '').replace('uploads/', '');
-  });
-  res.json(uploadedFiles);
-});
+// app.post('/upload', multerMiddleware.array('photos', 100), (req, res) => {
+//   if (!Array.isArray(req.files)) return;
+//   const uploadedFiles = [...req.files].map((file) => {
+//     // console.log(file);
+//     const { path, originalname } = file;
+//     const ext = originalname.split('.').at(-1);
+//     const newPath = path + '.' + ext;
+
+//     fs.renameSync(path, newPath);
+//     return newPath.replace('uploads\\', '').replace('uploads/', '');
+//   });
+//   res.json(uploadedFiles);
+// });
 
 app.post('/places', async function (req, res) {
   const { token } = req.cookies;
