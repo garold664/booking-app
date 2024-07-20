@@ -1,7 +1,9 @@
 import { Router } from 'express';
+import { readFileSync, unlinkSync } from 'fs';
 import imageDownloader from 'image-downloader';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { v2 as cloudinary } from 'cloudinary';
 
 const uploadByLinkRoute = Router();
 
@@ -16,7 +18,24 @@ uploadByLinkRoute.post('/upload-by-link', async (req, res) => {
       url: link,
       dest: __dirname + '/uploads/' + newName,
     });
-    res.json(newName);
+
+    let url = '';
+    await cloudinary.uploader.upload(
+      __dirname + '/uploads/' + newName,
+      (error, result) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).json({
+            success: false,
+            message: 'Error',
+          });
+        }
+        url = result!.secure_url;
+      }
+    );
+    unlinkSync(__dirname + '/uploads/' + newName);
+    res.json(url);
+    // res.json(newName);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
