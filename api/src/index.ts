@@ -12,15 +12,16 @@ import { default as mongoose } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt, { Secret } from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
-import imageDownloader from 'image-downloader';
-import multer from 'multer';
-import fs from 'fs';
+// import imageDownloader from 'image-downloader';
+// import multer from 'multer';
+// import fs from 'fs';
 
 import User from './models/Users.js';
 import Place from './models/Place.js';
 import Booking from './models/Booking.js';
 
 import uploadRoute from './routes/uploadRoute.js';
+import uploadByLinkRoute from './routes/uploadByLinkRoute.js';
 dotenv.config();
 
 type UserData = {
@@ -139,24 +140,25 @@ app.post('/logout', (req, res) => {
   res.cookie('token', '').json(true);
 });
 
-app.post('/upload-by-link', async (req, res) => {
-  const { link } = req.body;
+// app.post('/upload-by-link', async (req, res) => {
+//   const { link } = req.body;
 
-  const newName = 'photo' + Date.now() + '.jpg';
-  try {
-    await imageDownloader.image({
-      url: link,
-      dest: __dirname + '/uploads/' + newName,
-    });
-    res.json(newName);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
+//   const newName = 'photo' + Date.now() + '.jpg';
+//   try {
+//     await imageDownloader.image({
+//       url: link,
+//       dest: __dirname + '/uploads/' + newName,
+//     });
+//     res.json(newName);
+//   } catch (error) {
+//     console.error(error);
+//     res.sendStatus(500);
+//   }
+// });
 
 // const photosMiddleware = multer({ dest: 'uploads/' });
 
+app.use(uploadByLinkRoute);
 app.use(uploadRoute);
 
 // app.post('/upload', multerMiddleware.array('photos', 100), (req, res) => {
