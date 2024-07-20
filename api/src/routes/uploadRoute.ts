@@ -21,21 +21,15 @@ router.post(
     if (!Array.isArray(req.files)) return;
     const uploadedFiles = await Promise.all(
       [...req.files].map(async (file) => {
-        let url = '';
-        await cloudinary.uploader.upload(file.path, (error, result) => {
-          if (error) {
-            console.error(error);
-            return res.status(500).json({
-              success: false,
-              message: 'Error',
-            });
+        const { secure_url: url } = await cloudinary.uploader.upload(
+          file.path,
+          {
+            folder: 'booking-app',
           }
-          url = result!.secure_url;
-        });
+        );
         return url;
       })
     );
-    console.log(uploadedFiles);
     res.status(200).json(uploadedFiles);
   }
 );

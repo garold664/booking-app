@@ -19,20 +19,14 @@ uploadByLinkRoute.post('/upload-by-link', async (req, res) => {
       dest: __dirname + '/uploads/' + newName,
     });
 
-    let url = '';
-    await cloudinary.uploader.upload(
+    // let url = '';
+    const { secure_url: url } = await cloudinary.uploader.upload(
       __dirname + '/uploads/' + newName,
-      (error, result) => {
-        if (error) {
-          console.error(error);
-          return res.status(500).json({
-            success: false,
-            message: 'Error',
-          });
-        }
-        url = result!.secure_url;
+      {
+        folder: 'booking-app',
       }
     );
+
     unlinkSync(__dirname + '/uploads/' + newName);
     res.json(url);
     // res.json(newName);
