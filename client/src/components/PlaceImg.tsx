@@ -18,7 +18,8 @@ export default function PlaceImg({
   return (
     <img
       className={className}
-      src={`${baseUrl}/uploads/${place.photos[index]}`}
+      // src={`${baseUrl}/uploads/${place.photos[index]}`}
+      src={`https://res.cloudinary.com/dudevjtfp/image/upload/v1721463218/booking-app/${place.photos[index]}`}
     />
   );
 }

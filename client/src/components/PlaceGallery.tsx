@@ -23,7 +23,8 @@ export default function PlaceGallery({ place }: PlaceGalleryProps) {
           // className="object-cover w-full h-full"
           onClick={() => setShowAllPhotos(true)}
           className="object-cover aspect-square h-full cursor-pointer transition duration-300 hover:opacity-80"
-          src={`${baseUrl}/uploads/${place.photos[index]}`}
+          // src={`${baseUrl}/uploads/${place.photos[index]}`}
+          src={`https://res.cloudinary.com/dudevjtfp/image/upload/v1721463218/booking-app/${place.photos[index]}`}
         />
       )
     );

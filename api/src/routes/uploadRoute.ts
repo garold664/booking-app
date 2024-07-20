@@ -24,6 +24,7 @@ router.post(
         const { secure_url: url } = await cloudinary.uploader.upload(
           file.path,
           {
+            // unique_filename: false,
             folder: 'booking-app',
           }
         );
