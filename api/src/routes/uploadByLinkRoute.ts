@@ -5,8 +5,6 @@ import { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { v2 as cloudinary } from 'cloudinary';
 import { uploadsUrl } from '../lib/baseUrl.js';
-// const uploadsUrl =
-//   'https://res.cloudinary.com/dudevjtfp/image/upload/v1721463218/booking-app/';
 
 const uploadByLinkRoute = Router();
 
