@@ -32,7 +32,7 @@ export default function PlacePage() {
     <>
       <GalleryPopup place={place}>
         <div className="mt-4 bg-gray-200 -mx-4 -mb-4 py-8 ">
-          <div className="max-w-[1400px] m-auto">
+          <div className="max-w-[1400px] m-auto px-2">
             <h1 className="text-3xl">{place.title}</h1>
             <AddressLink>{place.address}</AddressLink>
             <PlaceGallery place={place} />
@@ -49,7 +49,7 @@ export default function PlacePage() {
               </div>
               <BookingWidget place={place} />
             </div>
-            <div className="text-sm text-gray-700 leading-4 -mx-8 px-8 py-8 border-gray-300 border-t bg-white rounded-lg shadow-md">
+            <div className="text-sm text-gray-700 leading-4  px-8 py-8 border-gray-300 border-t bg-white rounded-lg shadow-md">
               <h2 className="my-4 font-bold text-2xl">Extra Info</h2>
               {place.extraInfo}
             </div>

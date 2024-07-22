@@ -25,12 +25,14 @@ export default function Header() {
         </svg>
         <span className="font-bold text-xl">airbnc</span>
       </Link>
-      <div className="flex  gap-2 border border-gray-300 rounded-full p-2 px-4 shadow-md shadow-gray-300 overflow-hidden transition hover:shadow-lg cursor-pointer select-none">
-        <div>Anywhere</div>
-        <div className="border-l border-gray-300"></div>
-        <div>Anyweek</div>
-        <div className="border-l border-gray-300"></div>
-        <div>Add guests</div>
+      <div className="flex  gap-2 sm:border border-gray-300 rounded-full p-2 sm:px-4 sm:shadow-md sm:shadow-gray-300 overflow-hidden transition hover:shadow-lg cursor-pointer select-none">
+        <div className="sm:flex hidden  gap-2 xs:hidden">
+          <div>Anywhere</div>
+          <div className="border-l border-gray-300"></div>
+          <div>Anyweek</div>
+          <div className="border-l border-gray-300"></div>
+          <div>Add guests</div>
+        </div>
         <button className="bg-primary text-white p-1 rounded-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +84,7 @@ export default function Header() {
             />
           </svg>
         </div>
-        {!!user && <div>{user.name}</div>}
+        {!!user && <div className="text-sm whitespace-nowrap">{user.name}</div>}
       </Link>
     </header>
   );
