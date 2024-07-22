@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
+import { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { PlaceType } from '../lib/types';
-import baseUrl from '../baseUrl';
+import { uploadsUrl } from '../baseUrl';
 
 export default function IndexPage() {
   const [places, setPlaces] = useState<PlaceType[] | []>([]);
@@ -42,7 +42,7 @@ export default function IndexPage() {
               <img
                 className="rounded-2xl aspect-square object-cover mb-2"
                 // src={`${baseUrl}/uploads/${place.photos[0]}`}
-                src={`https://res.cloudinary.com/dudevjtfp/image/upload/v1721463218/booking-app/${place.photos[0]}`}
+                src={`${uploadsUrl}/${place.photos[0]}`}
                 alt=""
               />
             )}

@@ -4,7 +4,7 @@ import { Transition } from 'react-transition-group';
 import { useGalleryContext } from '../contexts/galleryContext';
 
 import { PlaceType } from '../../../lib/types.ts';
-import baseUrl from '../baseUrl.ts';
+import { uploadsUrl } from '../baseUrl.ts';
 
 const showFullGallery = (
   classNames: string,
@@ -45,8 +45,7 @@ const showFullGallery = (
             <div key={photo}>
               <img
                 className="object-cover aspect-square w-full"
-                // src={`${baseUrl}/uploads/${photo}`}
-                src={`https://res.cloudinary.com/dudevjtfp/image/upload/v1721463218/booking-app/${photo}`}
+                src={`${uploadsUrl}${photo}`}
                 alt=""
               />
             </div>

@@ -119,7 +119,7 @@ export default function PlacesFormPage() {
               type="number"
               placeholder="11:00"
               value={checkOut}
-              onChange={(ev) => setCheckOut(ev.target.value)}
+              onChange={(ev) => setCheckOut(+ev.target.value)}
             />
           </div>
           <div>

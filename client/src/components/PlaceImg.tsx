@@ -1,6 +1,5 @@
-import React from 'react';
-import { type PlaceType } from '../../../lib/types';
-import baseUrl from '../baseUrl';
+import { uploadsUrl } from '../baseUrl';
+import { PlaceType } from '../lib/types';
 
 type PlaceImgProps = {
   place: PlaceType;
@@ -19,7 +18,7 @@ export default function PlaceImg({
     <img
       className={className}
       // src={`${baseUrl}/uploads/${place.photos[index]}`}
-      src={`https://res.cloudinary.com/dudevjtfp/image/upload/v1721463218/booking-app/${place.photos[index]}`}
+      src={`${uploadsUrl}${place.photos[index]}`}
     />
   );
 }
