@@ -4,6 +4,9 @@ import imageDownloader from 'image-downloader';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { v2 as cloudinary } from 'cloudinary';
+import { uploadsUrl } from '../lib/baseUrl.js';
+// const uploadsUrl =
+//   'https://res.cloudinary.com/dudevjtfp/image/upload/v1721463218/booking-app/';
 
 const uploadByLinkRoute = Router();
 
@@ -28,7 +31,8 @@ uploadByLinkRoute.post('/upload-by-link', async (req, res) => {
     );
 
     unlinkSync(__dirname + '/uploads/' + newName);
-    res.json(url);
+    const fileName = url.replace(uploadsUrl, '');
+    res.json(fileName);
     // res.json(newName);
   } catch (error) {
     console.error(error);

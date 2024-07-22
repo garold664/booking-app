@@ -4,6 +4,7 @@ import { Router } from 'express';
 import { v2 as cloudinary } from 'cloudinary';
 import multerMiddleware from '../lib/multerMiddleware.js';
 import dotenv from 'dotenv';
+import { uploadsUrl } from '../lib/baseUrl.js';
 
 dotenv.config();
 
@@ -28,7 +29,9 @@ router.post(
             folder: 'booking-app',
           }
         );
-        return url;
+
+        const fileName = url.replace(uploadsUrl, '');
+        return fileName;
       })
     );
     res.status(200).json(uploadedFiles);

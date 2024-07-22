@@ -1,6 +1,6 @@
 import {
-  Booking as BookingType,
-  PlaceType,
+  type Booking as BookingType,
+  type PlaceType,
   type User as UserType,
 } from './lib/types.js';
 

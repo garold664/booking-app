@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { uploadsUrl } from '../baseUrl';
 
 type PhotosUploaderProps = {
   addedPhotos: string[];
@@ -96,7 +97,7 @@ export default function PhotosUploader({
               <img
                 className="rounded-2xl w-full object-cover"
                 // src={`${baseUrl}/uploads/${link}`}
-                src={`${link}`}
+                src={`${uploadsUrl}${link}`}
                 alt=""
               />
               <button
