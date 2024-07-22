@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import BookingWidget from '../components/BookingWidget';
 import PlaceGallery from '../components/PlaceGallery';
-import AddressLink from '../AddressLink';
+import AddressLink from '../components/AddressLink';
 import GalleryPopup from '../components/GalleryPopup';
-import { type PlaceType } from '../../../lib/types';
+import { type PlaceType } from '../lib/types';
 
 export default function PlacePage() {
   const { id } = useParams();

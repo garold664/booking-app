@@ -1,4 +1,4 @@
-import { uploadsUrl } from '../baseUrl';
+import { uploadsUrl } from '../lib/baseUrl';
 import { PlaceType } from '../lib/types';
 
 type PlaceImgProps = {

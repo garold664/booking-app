@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { uploadsUrl } from '../baseUrl';
+import { uploadsUrl } from '../lib/baseUrl';
 
 type PhotosUploaderProps = {
   addedPhotos: string[];

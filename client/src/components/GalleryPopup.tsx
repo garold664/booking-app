@@ -1,10 +1,10 @@
 import React from 'react';
-import { Transition } from 'react-transition-group';
+import { Transition, TransitionStatus } from 'react-transition-group';
 
 import { useGalleryContext } from '../contexts/galleryContext';
 
-import { PlaceType } from '../../../lib/types.ts';
-import { uploadsUrl } from '../baseUrl.ts';
+import { PlaceType } from '../lib/types.ts';
+import { uploadsUrl } from '../lib/baseUrl.ts';
 
 const showFullGallery = (
   classNames: string,
@@ -67,7 +67,7 @@ export default function Popup({ children, place }: PopupProps) {
   return (
     <>
       <Transition in={showAllPhotos} mountOnEnter unmountOnExit timeout={500}>
-        {(state: 'entering' | 'entered' | 'exiting' | 'exited') => {
+        {(state: TransitionStatus) => {
           const classNames =
             state === 'entering' || state === 'entered'
               ? 'absolute opacity-100 top-0'

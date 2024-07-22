@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { PlaceType } from '../lib/types';
-import { uploadsUrl } from '../baseUrl';
+import { uploadsUrl } from '../lib/baseUrl';
 
 export default function IndexPage() {
   const [places, setPlaces] = useState<PlaceType[] | []>([]);

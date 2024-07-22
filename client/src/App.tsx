@@ -14,7 +14,7 @@ import PlacesFormPage from './pages/PlacesFormPage';
 import BookingsPage from './pages/BookingsPage';
 import BookingPage from './pages/BookingPage';
 import GalleryContextProvider from './contexts/galleryContext';
-import baseUrl from './baseUrl';
+import baseUrl from './lib/baseUrl';
 
 axios.defaults.baseURL = baseUrl;
 axios.defaults.withCredentials = true;

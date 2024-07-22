@@ -1,6 +1,5 @@
-import React from 'react';
 import { differenceInCalendarDays, format } from 'date-fns';
-import { type Booking } from '../../../lib/types';
+import { type Booking } from '../lib/types';
 
 type BookingDatesProps = {
   booking: Booking;

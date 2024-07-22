@@ -1,7 +1,6 @@
-import React from 'react';
 import { useGalleryContext } from '../contexts/galleryContext';
-import { PlaceType } from '../../../lib/types';
-import baseUrl, { uploadsUrl } from '../baseUrl';
+import { PlaceType } from '../lib/types';
+import { uploadsUrl } from '../lib/baseUrl';
 
 type PlaceGalleryProps = {
   place: PlaceType;

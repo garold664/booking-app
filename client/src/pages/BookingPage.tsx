@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import AddressLink from '../AddressLink';
+import AddressLink from '../components/AddressLink';
 import PlaceGallery from '../components/PlaceGallery';
 import BookingDates from '../components/BookingDates';
 import GalleryPopup from '../components/GalleryPopup';
 
-import { type Booking } from '../../../lib/types';
+import { type Booking } from '../lib/types';
 
 export default function BookingPage() {
   const { id } = useParams();
@@ -37,7 +37,7 @@ export default function BookingPage() {
           <div className="flex justify-between items-center bg-gray-200 p-4 mb-4 rounded-xl">
             <div>
               <h2 className="text-2xl mb-4">Your booking information:</h2>
-              <BookingDates booking={booking} />
+              <BookingDates booking={booking} className="" />
             </div>
             <div className="bg-primary p-5 rounded-md text-white">
               <h3>Total price:</h3>

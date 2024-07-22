@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { differenceInCalendarDays } from 'date-fns';
 import { Navigate } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserContext.tsx';
-import { PlaceType } from '../../../lib/types.ts';
+import { PlaceType } from '../lib/types.ts';
 
 type BookingWidgetProps = {
   place: PlaceType;

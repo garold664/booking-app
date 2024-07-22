@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Perks from '../Perks';
+import Perks from '../components/Perks';
 import axios from 'axios';
 import PhotosUploader from '../components/PhotosUploader';
 import AccountNav from '../components/AccountNav';
@@ -10,7 +10,7 @@ export default function PlacesFormPage() {
   const [address, setAddress] = useState('');
   const [addedPhotos, setAddedPhotos] = useState<string[]>([]);
   const [description, setDescription] = useState('');
-  const [perks, setPerks] = useState([]);
+  const [perks, setPerks] = useState<string[]>([]);
   const [extraInfo, setExtraInfo] = useState('');
   const [checkIn, setCheckIn] = useState(14);
   const [checkOut, setCheckOut] = useState(11);

@@ -1,5 +1,3 @@
-import React from 'react';
-
 type AddressLinkProps = {
   children: string;
   className?: string;

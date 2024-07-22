@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-
 type PerksProps = {
   selected: string[];
-  onChange: (perks: string[]) => void;
+  onChange: React.Dispatch<React.SetStateAction<string[]>>;
 };
 export default function Perks({ selected, onChange }: PerksProps) {
   function handleCbClick(ev: React.ChangeEvent<HTMLInputElement>) {
