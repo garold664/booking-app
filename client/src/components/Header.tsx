@@ -3,6 +3,7 @@ import { useUserContext } from '../contexts/UserContext.tsx';
 
 export default function Header() {
   const { user } = useUserContext();
+  const loginClasses = `relative animate-shadow-pulse after:animate-bounce after:content-['⬆️'] text-5xl after:absolute after:bottom-[-100px] after:left-[15%] after:text-primary after:font-bold after:pointer-events-none`;
   return (
     <header className=" container mx-auto flex justify-between">
       <Link
@@ -51,9 +52,10 @@ export default function Header() {
         </button>
       </div>
       <Link
-        // to={'/login'}
         to={user ? '/account' : '/login'}
-        className="flex items-center gap-2 border border-gray-300 rounded-full p-2 px-4 shadow-md shadow-gray-300 transition duration-300 hover:shadow-lg"
+        className={`flex items-center gap-2 border border-gray-300 rounded-full p-2 px-4  transition duration-300 hover:shadow-lg ${
+          !user ? loginClasses : 'shadow-md shadow-gray-300'
+        }`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
