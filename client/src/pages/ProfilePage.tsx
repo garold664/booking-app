@@ -4,7 +4,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import PlacesPage from './PlacesPage.tsx';
 import AccountNav from '../components/AccountNav.tsx';
-import Spinner from '../ui/spinner.tsx';
+import Spinner from '../ui/Spinner.tsx';
 
 export default function ProfilePage() {
   let { subpage } = useParams();

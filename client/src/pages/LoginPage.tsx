@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUserContext } from '../contexts/UserContext.tsx';
-import Spinner from '../ui/spinner.tsx';
+import Spinner from '../ui/Spinner.tsx';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('test@email.com');
