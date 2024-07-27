@@ -17,7 +17,9 @@ const showFullGallery = (
     >
       <div className="p-8 grid gap-4 max-w-[1400px] m-auto">
         <div>
-          <h2 className="text-3xl pr-48">Photos of {place.title}</h2>
+          <h2 className="sm:text-3xl pt-10 font-bold">
+            Photos of {place.title}
+          </h2>
           <button
             onClick={() => setShowAllPhotos(false)}
             className="fixed right-2 top-2 flex gap-1 p-2 rounded-md bg-gray-200 shadow-lg shadow-gray-900 duration-150 hover:shadow-md hover:shadow-gray-700"
