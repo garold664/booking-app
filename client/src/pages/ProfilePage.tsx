@@ -4,6 +4,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import PlacesPage from './PlacesPage.tsx';
 import AccountNav from '../components/AccountNav.tsx';
+import Spinner from '../ui/spinner.tsx';
 
 export default function ProfilePage() {
   let { subpage } = useParams();
@@ -53,7 +54,13 @@ export default function ProfilePage() {
             className={'primary'}
             disabled={isLoading && !error}
           >
-            {isLoading && !error ? 'Loading...' : 'Logout'}
+            {isLoading && !error ? (
+              <span className="flex gap-2 justify-center">
+                Loading... <Spinner />
+              </span>
+            ) : (
+              'Logout'
+            )}
           </button>
           {error && <p className="text-red-600 font-bold">{error}</p>}
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUserContext } from '../contexts/UserContext.tsx';
+import Spinner from '../ui/spinner.tsx';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('test@email.com');
@@ -55,7 +56,13 @@ export default function LoginPage() {
           className={'primary'}
           disabled={isLoading && !error}
         >
-          {isLoading && !error ? 'Loading...' : 'Login'}
+          {isLoading && !error ? (
+            <span className="flex gap-2 justify-center">
+              Loading... <Spinner />
+            </span>
+          ) : (
+            'Login'
+          )}
         </button>
         {error && <p className="text-red-600 font-bold">{error}</p>}
         <div className="text-center py-2 text-gray-500">
